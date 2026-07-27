@@ -1,0 +1,33 @@
+---
+/**
+ * Microsite layout — Primary and Secondary share this shell.
+ *
+ * The data-section attribute on <html> (set by BaseLayout from props) drives
+ * the accent colour, so Primary gets warm orange, Secondary gets cool teal.
+ * Sub-navigation is pinned below the main header. Everything else is shared.
+ */
+import BaseLayout from './BaseLayout.astro';
+import SectionNav from '../components/layout/SectionNav.astro';
+import type { SectionKey } from '../data/sections';
+import { sections } from '../data/sections';
+
+interface Props {
+  title: string;
+  section: SectionKey;
+  description?: string;
+  appendSiteName?: boolean;
+}
+
+const { title, section, description, appendSiteName = true } = Astro.props;
+const sectionConfig = sections[section];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  section={section}
+  appendSiteName={appendSiteName}
+>
+  <SectionNav section={sectionConfig} />
+  <slot />
+</BaseLayout>

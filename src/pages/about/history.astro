@@ -1,0 +1,35 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+---
+
+<PageLayout
+  title="Our History | About Us"
+  crumbs={[{ label: 'About', href: '/about' }, { label: 'History' }]}
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <SectionTitle title="Our History" eyebrow="1998 onwards" align="center" />
+
+      <div class="prose mx-auto mt-5">
+        <p>
+          Northgate Academy was founded in 1998 by a group of educators with a shared vision:
+          to create a school where academic excellence and genuine pastoral care go hand in hand.
+        </p>
+        <p>
+          Starting with just 80 pupils in Primary, Northgate has grown steadily and thoughtfully.
+          In 2008, we opened our Secondary section. Today, we serve over 900 students from ages 5–18.
+        </p>
+        <p>
+          Throughout our growth, we have held fast to our founding values. We have never chased size
+          for its own sake. Instead, we have invested in keeping classes small, maintaining strong
+          pastoral systems, and ensuring every child is known.
+        </p>
+        <p>
+          Our buildings and facilities have evolved over time, but our ethos has remained constant:
+          learning is joyful, staff genuinely care, and every child belongs here.
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

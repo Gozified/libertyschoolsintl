@@ -1,0 +1,120 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { site } from '../../data/site';
+---
+
+<PageLayout
+  title="Make an Enquiry | Admissions"
+  crumbs={[{ label: 'Admissions', href: '/admissions' }, { label: 'Make an Enquiry' }]}
+  standfirst="Tell us about your child and our admissions team will be in touch within two working days."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <form
+        name="admissions-enquiry"
+        method="POST"
+        action="/admissions/enquire/thank-you"
+        data-netlify="true"
+        data-netlify-honeypot="bot-field"
+        class="row g-3"
+      >
+        <input type="hidden" name="form-name" value="admissions-enquiry" />
+        <p class="d-none">
+          <label>
+            Leave this field blank if you're human: <input name="bot-field" />
+          </label>
+        </p>
+
+        <div class="col-md-6">
+          <label for="parent-name" class="form-label">Your name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="parent-name"
+            name="parent-name"
+            autocomplete="name"
+            required
+          />
+        </div>
+
+        <div class="col-md-6">
+          <label for="relationship" class="form-label">Relationship to child</label>
+          <select class="form-select" id="relationship" name="relationship" required>
+            <option value="" selected disabled>Choose one</option>
+            <option>Parent</option>
+            <option>Guardian</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email address</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div class="col-md-6">
+          <label for="phone" class="form-label">Phone number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            autocomplete="tel"
+            required
+          />
+        </div>
+
+        <div class="col-12">
+          <hr class="my-2" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="child-name" class="form-label">Child's name</label>
+          <input type="text" class="form-control" id="child-name" name="child-name" required />
+        </div>
+
+        <div class="col-md-6">
+          <label for="child-age" class="form-label">Child's age</label>
+          <input type="text" class="form-control" id="child-age" name="child-age" required />
+        </div>
+
+        <div class="col-md-6">
+          <label for="section" class="form-label">Section of interest</label>
+          <select class="form-select" id="section" name="section" required>
+            <option value="" selected disabled>Choose one</option>
+            <option>Primary</option>
+            <option>Secondary</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="current-school" class="form-label">Current school <span class="text-body-secondary">(optional)</span></label>
+          <input type="text" class="form-control" id="current-school" name="current-school" />
+        </div>
+
+        <div class="col-12">
+          <label for="message" class="form-label">Anything else we should know?</label>
+          <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <div class="col-12 mt-4">
+          <button type="submit" class="btn btn-accent btn-lg">Send Enquiry</button>
+          <p class="text-body-secondary small mt-3 mb-0">
+            By submitting this form you agree to be contacted by our admissions team. See our
+            <a href="/privacy">Privacy Notice</a> for how we handle your information. Prefer to
+            talk? Call <a href={`tel:${site.contact.phone.href}`}>{site.contact.phone.display}</a>
+            or email <a href={`mailto:${site.contact.admissionsEmail}`}>{site.contact.admissionsEmail}</a>.
+          </p>
+        </div>
+      </form>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,171 @@
+// ============================================================================
+//  Base layer — global element behaviour and the accessibility baseline.
+//  The previous build shipped none of this; it is the reason it failed WCAG.
+// ============================================================================
+
+html {
+  scroll-behavior: smooth;
+  // Sticky header must not cover the target of an in-page anchor
+  scroll-padding-top: 6rem;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-synthesis-weight: none;
+}
+
+// ── Focus ───────────────────────────────────────────────────────────────────
+// :focus-visible only, so mouse users don't see rings but keyboard users always do.
+:focus-visible {
+  outline: $focus-ring-width solid var(--nga-accent, #{$gold-500});
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+// Bootstrap sets its own focus shadows on controls; keep them but add the
+// outline so the ring is visible against any background.
+.btn:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible {
+  outline: $focus-ring-width solid $navy-800;
+  outline-offset: 2px;
+}
+
+// ── Skip link ───────────────────────────────────────────────────────────────
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  padding: 0.75rem 1.25rem;
+  background: $navy-900;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom-right-radius: $border-radius-sm;
+  transform: translateY(-110%);
+  transition: transform var(--nga-dur-fast) var(--nga-ease);
+
+  &:focus {
+    transform: translateY(0);
+    color: #fff;
+  }
+}
+
+// ── Headings ────────────────────────────────────────────────────────────────
+// Fraunces is an optical-size variable font; nudge the axis so large display
+// text tightens up and small headings stay legible.
+h1, h2, h3, .h1, .h2, .h3 {
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}
+
+// ── Long-form text ──────────────────────────────────────────────────────────
+.prose {
+  max-width: var(--nga-measure);
+
+  > p,
+  > ul,
+  > ol {
+    margin-bottom: 1.25rem;
+  }
+
+  a:not(.btn) {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+}
+
+.measure       { max-width: var(--nga-measure); }
+.measure-narrow { max-width: var(--nga-measure-narrow); }
+
+// ── Section rhythm ──────────────────────────────────────────────────────────
+.section {
+  padding-block: var(--nga-section-y);
+}
+
+.section-tight {
+  padding-block: var(--nga-section-y-tight);
+}
+
+.section-tint {
+  background-color: $navy-50;
+}
+
+.section-ink {
+  background-color: $navy-900;
+  color: rgba(#fff, 0.86);
+
+  h1, h2, h3, h4, h5, h6 { color: #fff; }
+}
+
+// ── Images ──────────────────────────────────────────────────────────────────
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+// Ratio helpers for placeholder-shaped media
+.ratio-hero    { aspect-ratio: 16 / 7; }
+.ratio-card    { aspect-ratio: 3 / 2; }
+.ratio-square  { aspect-ratio: 1 / 1; }
+.ratio-portrait { aspect-ratio: 4 / 5; }
+
+.object-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// ── Scroll-reveal ───────────────────────────────────────────────────────────
+// Applied by src/scripts/reveal.ts via IntersectionObserver. The element is
+// visible by default and only hidden once JS confirms it will animate it,
+// so content is never lost if JS fails.
+[data-reveal].is-armed {
+  opacity: 0;
+  transform: translateY(1.25rem);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--nga-dur-slow) var(--nga-ease),
+    transform var(--nga-dur-slow) var(--nga-ease);
+}
+
+// ── Reduced motion ──────────────────────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal].is-armed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// ── Print ───────────────────────────────────────────────────────────────────
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .no-print {
+    display: none !important;
+  }
+}

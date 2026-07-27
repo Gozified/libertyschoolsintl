@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800" role="img" aria-label="Placeholder: Parent portrait">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d3ddee"/>
+      <stop offset="1" stop-color="#b3c4de"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="800" fill="url(#g)"/>
+  <rect x="8" y="8" width="784" height="784" fill="none" stroke="#5a7cba" stroke-width="3" stroke-dasharray="14 10"/>
+  <g transform="translate(400 285.6)" fill="none" stroke="#2a4880" stroke-width="7.280000000000001" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-52" y="-35.36" width="104" height="74.88" rx="10.4"/>
+    <circle cx="0" cy="0" r="20.8"/>
+    <path d="M-18.72 -35.36 l9.36 -13.52 h18.72 l9.36 13.52"/>
+  </g>
+  <text x="400" y="445" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="50" font-weight="600" fill="#0f1d3d">Parent portrait</text>
+  <text x="400" y="502" text-anchor="middle" font-family="system-ui, sans-serif" font-size="30" font-weight="600" fill="#2a4880" letter-spacing="2">PLACEHOLDER · 1:1 · 800×800</text>
+</svg>

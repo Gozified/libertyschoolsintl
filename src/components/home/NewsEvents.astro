@@ -1,0 +1,109 @@
+---
+/**
+ * News and events — two columns, recent news on the left, upcoming events on
+ * the right. Both pull from the same content collections that drive /news
+ * and /events, so the homepage preview can never drift out of sync with the
+ * full listing the way the previous build's hand-copied homepage did.
+ */
+import { getCollection } from 'astro:content';
+import SectionTitle from '../ui/SectionTitle.astro';
+
+const allNews = (await getCollection('news', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+const latestNews = allNews.slice(0, 3);
+
+const now = new Date();
+const allEvents = (await getCollection('events')).sort(
+  (a, b) => a.data.start.valueOf() - b.data.start.valueOf(),
+);
+const upcomingEvents = allEvents.filter((e) => e.data.start >= now).slice(0, 3);
+
+const dayMonth = (date: Date) => ({
+  day: date.toLocaleDateString('en-GB', { day: '2-digit' }),
+  month: date.toLocaleDateString('en-GB', { month: 'short' }),
+});
+---
+
+<section class="section">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Latest"
+      title="News & events"
+      align="center"
+    />
+
+    <div class="row g-5 mt-5">
+      <!-- News -->
+      <div class="col-lg-7">
+        <h3 class="h5 mb-3">Recent news</h3>
+        <div class="row g-3">
+          {
+            latestNews.map((item) => (
+              <div class="col-12">
+                <a
+                  class="card card-lift card-link-overlay text-decoration-none"
+                  href={`/news/${item.id}`}
+                >
+                  <div class="card-body">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                      <span class="badge bg-accent text-dark">{item.data.category}</span>
+                      <span class="text-body-secondary small">
+                        {item.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}
+                      </span>
+                    </div>
+                    <h4 class="h5 mb-1 text-body">
+                      <a class="card-link-overlay__target" href={`/news/${item.id}`}>
+                        {item.data.title}
+                      </a>
+                    </h4>
+                    <p class="mb-0 text-body-secondary">{item.data.excerpt}</p>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+        <div class="mt-4">
+          <a class="btn btn-outline-primary" href="/news">All news</a>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div class="col-lg-5">
+        <h3 class="h5 mb-3">Upcoming events</h3>
+        <div class="row g-3">
+          {
+            upcomingEvents.map((event) => {
+              const { day, month } = dayMonth(event.data.start);
+              return (
+                <div class="col-12">
+                  <a class="card card-lift text-decoration-none" href="/events">
+                    <div class="card-body d-flex gap-3 align-items-start">
+                      <span class="date-chip flex-shrink-0">
+                        <span class="date-chip__day">{day}</span>
+                        <span class="date-chip__month">{month}</span>
+                      </span>
+                      <div class="flex-grow-1">
+                        <h4 class="h6 mb-1 text-body-emphasis">{event.data.title}</h4>
+                        <p class="text-body-secondary small mb-0">{event.data.excerpt ?? event.data.location}</p>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              );
+            })
+          }
+          {
+            upcomingEvents.length === 0 && (
+              <p class="text-body-secondary">No upcoming events scheduled right now — check back soon.</p>
+            )
+          }
+        </div>
+        <div class="mt-4">
+          <a class="btn btn-outline-primary" href="/events">All events</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

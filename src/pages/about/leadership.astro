@@ -1,0 +1,48 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<PageLayout
+  title="Leadership Team | About Us"
+  crumbs={[{ label: 'About', href: '/about' }, { label: 'Leadership' }]}
+>
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        eyebrow="Meet the team"
+        title="School Leadership"
+        align="center"
+      />
+
+      <div class="row g-5 mt-5">
+        {
+          [
+            { name: 'Dr Sarah Johnson', title: 'Head of School', bio: 'Leading Northgate since 2015, Sarah is passionate about progressive education and student wellbeing.', img: 'welcome-head' },
+            { name: 'James Lee', title: 'Deputy Head', bio: 'James oversees pastoral systems and co-curricular programmes.', img: 'staff-portrait-1' },
+            { name: 'Emma Williams', title: 'Head of Primary', bio: 'Emma leads our Primary section with focus on joy and discovery in learning.', img: 'staff-portrait-2' },
+            { name: 'Michael Chen', title: 'Head of Secondary', bio: 'Michael drives academic rigour and university preparation in Secondary.', img: 'staff-portrait-3' },
+          ].map((person) => (
+            <div class="col-md-6">
+              <div class="row g-4 align-items-center">
+                <div class="col-4">
+                  <PlaceholderImage
+                    name={person.img}
+                    alt={person.name}
+                    class="rounded-2"
+                  />
+                </div>
+                <div class="col-8">
+                  <h3 class="h5">{person.name}</h3>
+                  <p class="text-body-secondary small mb-2">{person.title}</p>
+                  <p class="text-body-secondary small">{person.bio}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</PageLayout>

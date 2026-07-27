@@ -1,0 +1,39 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { site } from '../../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Staff Portal"
+  crumbs={[{ label: 'Staff Portal' }]}
+  standfirst="Registers, planning and internal resources for Northgate staff."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="rounded-2 p-4 p-md-5 text-center" style="background:var(--nga-tint);">
+        <Icon name="lucide:briefcase" width="40" height="40" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+        <h2 class="h4 mt-3">Not yet connected</h2>
+        <p class="text-body-secondary mx-auto" style="max-width:32rem;">
+          The Staff Portal isn't wired up to a live login system yet. This is a placeholder page
+          — once the school's internal systems are confirmed, this page will link straight to
+          them. Staff editing website content should use the CMS at <code>/admin</code> instead.
+        </p>
+      </div>
+
+      <div class="prose mt-5">
+        <h2>What the Staff Portal will offer</h2>
+        <ul>
+          <li>Attendance registers and lesson planning tools</li>
+          <li>Shared staff resources and internal documents</li>
+          <li>Timetabling and cover arrangements</li>
+        </ul>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="mb-3">Looking to edit website content instead?</p>
+        <a class="btn btn-primary" href="/admin">Go to the Content Admin</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

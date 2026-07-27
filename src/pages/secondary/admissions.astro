@@ -1,0 +1,52 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Secondary Admissions | Northgate Academy"
+  section="secondary"
+  description="How to apply for a Secondary place at Northgate Academy, ages 11 to 18."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="hero-secondary" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Secondary Admissions</h1>
+      <p class="page-header__standfirst">Joining Northgate from Year 7 through to Sixth Form.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-7">
+          <SectionTitle eyebrow="Entry points" title="When students can join" />
+          <div class="prose">
+            <p>
+              Most students join us in Year 7, moving up from our own Primary School or from
+              another school. We also welcome later entry into Years 8–11, and into Sixth Form,
+              subject to a place being available and an entrance assessment in English and
+              Mathematics. Our full, school-wide admissions process — including required
+              documents, fees and how to apply — is covered on the main
+              <a href="/admissions">Admissions</a> pages.
+            </p>
+            <p>
+              Sixth Form applicants are also asked for a short interview, and IGCSE (or
+              equivalent) results where already available.
+            </p>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a class="btn btn-primary" href="/admissions/process">How to Apply</a>
+            <a class="btn btn-outline-primary" href="/admissions/enquire">Make an Enquiry</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <PlaceholderImage name="secondary-seminar" alt="Secondary students in discussion" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+</SectionLayout>

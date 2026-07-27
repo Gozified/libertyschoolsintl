@@ -1,0 +1,155 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+
+const section = 'primary';
+---
+
+<SectionLayout
+  title="Primary School | Northgate Academy"
+  section="primary"
+  description="Northgate Academy Primary: small classes, broad curriculum, ages 5–11."
+>
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="hero-primary" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Primary School</h1>
+      <p class="page-header__standfirst">
+        A curious, caring community where every child thrives.
+      </p>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle
+            eyebrow="The foundation"
+            title="Years 1 to 6"
+            standfirst="We believe the early years are crucial. Northgate Primary combines structured learning with genuine joy in discovery."
+          />
+          <div class="prose">
+            <p>
+              Our Primary School serves ages 5–11 (Years 1–6). We keep classes small so every child
+              is known, challenged, and supported. The curriculum is broad — English, Maths, Science,
+              Humanities, ICT, Creative Arts and PE — with time for play, exploration, and the things
+              that make learning real.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage
+            name="primary-classroom"
+            alt="Primary students learning in class"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key facts -->
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle
+        eyebrow="By the numbers"
+        title="A scale that works"
+        align="center"
+      />
+
+      <div class="row g-4 mt-5 text-center">
+        {
+          [
+            { label: 'Ages', value: '5–11' },
+            { label: 'Class max', value: '16' },
+            { label: 'Teacher:pupil', value: '1:12' },
+            { label: 'School day', value: '8am–3:30pm' },
+          ].map((item) => (
+            <div class="col-6 col-md-3">
+              <div class="stat__value">{item.value}</div>
+              <div class="stat__label" style="color:var(--nga-accent-strong)">
+                {item.label}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Curriculum snapshot -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        eyebrow="What we teach"
+        title="A broad curriculum"
+      />
+
+      <div class="row g-4 mt-5">
+        {
+          [
+            {
+              icon: 'lucide:book-open',
+              title: 'English & Literacy',
+              desc: 'Reading, writing, speaking — the foundation for everything else.',
+            },
+            {
+              icon: 'lucide:calculator',
+              title: 'Mathematics',
+              desc: 'Number sense, reasoning, and problem-solving through play and challenge.',
+            },
+            {
+              icon: 'lucide:beaker',
+              title: 'Science',
+              desc: 'Curiosity about the world: experiments, observation, discovery.',
+            },
+            {
+              icon: 'lucide:globe',
+              title: 'Humanities',
+              desc: 'History, geography, and citizenship — understanding our world.',
+            },
+            {
+              icon: 'lucide:laptop',
+              title: 'ICT & Coding',
+              desc: 'Digital literacy and computational thinking for modern life.',
+            },
+            {
+              icon: 'lucide:palette',
+              title: 'Creative Arts',
+              desc: 'Art, music, drama — where imagination becomes expression.',
+            },
+          ].map((subject) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature">
+                <div class="feature__icon" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={subject.icon} width="24" height="24" />
+                </div>
+                <h3 class="h5">{subject.title}</h3>
+                <p class="text-body-secondary mb-0">{subject.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-tight section-ink">
+    <div class="container text-center">
+      <h2 class="h3 mb-3" style="color:#fff">Ready to visit?</h2>
+      <p class="lead mb-4" style="color:rgba(255,255,255,.85)">
+        See the Primary School in action at our next open day.
+      </p>
+      <a class="btn btn-accent btn-lg" href="/admissions/enquire">
+        Make an Enquiry
+      </a>
+    </div>
+  </section>
+</SectionLayout>

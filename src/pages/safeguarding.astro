@@ -1,0 +1,50 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../data/site';
+---
+
+<PageLayout
+  title="Safeguarding Statement"
+  crumbs={[{ label: 'Safeguarding' }]}
+  standfirst="The welfare of every student is our first priority."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="alert alert-warning" role="note">
+        <strong>Placeholder policy text.</strong> This statement is a starting structure only. It
+        must be reviewed and finalised by the school's actual Designated Safeguarding Lead before
+        publication — safeguarding policy should never be published without qualified review.
+      </div>
+
+      <div class="prose">
+        <p>
+          Northgate Academy is committed to safeguarding and promoting the welfare of all
+          children and expects every member of staff, volunteer and visitor to share this
+          commitment.
+        </p>
+
+        <h2>Our commitment</h2>
+        <ul>
+          <li>All staff undergo background screening appropriate to their role before appointment.</li>
+          <li>Staff receive regular safeguarding training and refreshers.</li>
+          <li>A clear code of conduct governs all adult-child interactions on campus.</li>
+          <li>Concerns are recorded, escalated and acted on promptly through a defined process.</li>
+        </ul>
+
+        <h2>Designated Safeguarding Lead</h2>
+        <p>
+          Our Designated Safeguarding Lead (DSL) is Placeholder Name, who can be reached
+          confidentially at <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> or
+          via the school office on <a href={`tel:${site.contact.phone.href}`}>{site.contact.phone.display}</a>.
+        </p>
+
+        <h2>Reporting a concern</h2>
+        <p>
+          If you have a concern about the safety or welfare of a child at Northgate Academy,
+          please contact the DSL directly, or speak to any member of staff, who will pass the
+          concern on immediately.
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

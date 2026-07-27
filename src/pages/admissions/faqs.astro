@@ -1,0 +1,56 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+
+const faqs = [
+  { q: 'What age can my child start at Northgate?', a: 'Children can join Nursery from age 3. We also accept applications into any Primary or Secondary year group, subject to space and assessment.' },
+  { q: 'Is there an entrance examination?', a: 'Primary applicants have an informal, age-appropriate assessment. Secondary applicants sit a short written test in English and Mathematics, plus an interview for Sixth Form.' },
+  { q: 'Do you offer transport?', a: 'Yes, a school bus service covers several routes across the city. Ask our admissions team whether a route serves your area.' },
+  { q: 'Is boarding available?', a: 'No — Northgate is a day school only. Both Primary and Secondary share the one campus.' },
+  { q: 'Do you offer sibling discounts?', a: 'Sibling discounts and needs-based bursaries may be available. Speak to our admissions team for current details.' },
+  { q: 'Can my child join mid-year?', a: 'Yes, subject to space. Mid-year admissions follow the same enquiry, visit and assessment process as any other time.' },
+  { q: 'What exams do Secondary students sit?', a: 'Our Secondary students sit WAEC at Senior Secondary level and IGCSE examinations, opening pathways to universities in Nigeria and abroad.' },
+];
+---
+
+<PageLayout
+  title="Questions Parents Ask | Admissions"
+  crumbs={[{ label: 'Admissions', href: '/admissions' }, { label: 'FAQs' }]}
+  standfirst="Straight answers to the questions we hear most from prospective parents."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="accordion" id="admissionsFaq">
+        {
+          faqs.map((item, i) => (
+            <div class="accordion-item">
+              <h2 class="accordion-header" id={`faq-heading-${i}`}>
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target={`#faq-collapse-${i}`}
+                  aria-expanded="false"
+                  aria-controls={`faq-collapse-${i}`}
+                >
+                  {item.q}
+                </button>
+              </h2>
+              <div
+                id={`faq-collapse-${i}`}
+                class="accordion-collapse collapse"
+                aria-labelledby={`faq-heading-${i}`}
+                data-bs-parent="#admissionsFaq"
+              >
+                <div class="accordion-body text-body-secondary">{item.a}</div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="text-center mt-5">
+        Don't see your question? <a href="/contact">Get in touch</a> — we're happy to help.
+      </p>
+    </div>
+  </section>
+</PageLayout>

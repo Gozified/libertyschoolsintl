@@ -1,0 +1,76 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="University & Careers | Secondary School"
+  section="secondary"
+  description="How Northgate Academy prepares Sixth Form students for university and beyond."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="secondary-ict" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">University & Careers</h1>
+      <p class="page-header__standfirst">Guiding every student toward their next step, wherever it leads.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Starts early" title="Careers guidance from Year 10" />
+          <div class="prose">
+            <p>
+              Our careers programme begins well before Sixth Form — with subject taster sessions,
+              career talks, and work-experience placements. By the time students are choosing
+              universities and courses, they are making informed decisions, not guesses.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="secondary-classroom" alt="Sixth Form student in a careers advice session" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:file-text', title: 'Application Support', desc: 'One-to-one guidance on personal statements and university applications.' },
+            { icon: 'lucide:globe', title: 'Local & International Options', desc: 'Advice covering universities in Nigeria and abroad.' },
+            { icon: 'lucide:award', title: 'Scholarship Guidance', desc: 'Help identifying and applying for scholarships students are eligible for.' },
+            { icon: 'lucide:briefcase', title: 'Work Experience', desc: 'Placements and career talks connecting classroom learning to real careers.' },
+          ].map((item) => (
+            <div class="col-md-6 col-lg-3">
+              <div class="feature text-center">
+                <div class="feature__icon mx-auto" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container text-center measure mx-auto">
+      <p class="text-body-secondary small">
+        Placeholder — a list of recent graduate destinations will be added here once supplied by
+        the school.
+      </p>
+    </div>
+  </section>
+</SectionLayout>

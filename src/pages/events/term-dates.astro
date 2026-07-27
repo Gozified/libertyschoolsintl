@@ -1,0 +1,61 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+
+const terms = [
+  { term: 'First Term', resumption: 'Monday, 7 September 2026', halfTerm: 'Friday, 23 October 2026', closing: 'Friday, 11 December 2026' },
+  { term: 'Second Term', resumption: 'Monday, 11 January 2027', halfTerm: 'Friday, 26 February 2027', closing: 'Friday, 26 March 2027' },
+  { term: 'Third Term', resumption: 'Monday, 19 April 2027', halfTerm: 'Friday, 28 May 2027', closing: 'Friday, 16 July 2027' },
+];
+---
+
+<PageLayout
+  title="Term Dates"
+  crumbs={[{ label: 'Events', href: '/events' }, { label: 'Term Dates' }]}
+  standfirst="Our academic calendar for the 2026/2027 session."
+>
+  <section class="section">
+    <div class="container measure-wide mx-auto">
+      <div class="alert alert-warning" role="note">
+        <strong>Placeholder dates.</strong> The academic calendar below is illustrative and must
+        be replaced with confirmed dates from the school before publication.
+      </div>
+
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th scope="col">Term</th>
+              <th scope="col">Resumption</th>
+              <th scope="col">Half Term</th>
+              <th scope="col">Closing</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              terms.map((row) => (
+                <tr>
+                  <th scope="row" class="fw-normal">{row.term}</th>
+                  <td>{row.resumption}</td>
+                  <td>{row.halfTerm}</td>
+                  <td>{row.closing}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container measure mx-auto text-center">
+      <SectionTitle eyebrow="Also see" title="Public holidays & school closures" align="center" />
+      <p class="text-body-secondary mt-4">
+        Public holiday closures follow the official Nigerian calendar and are communicated to
+        parents in advance of each term. See <a href="/events">Events</a> for specific dates as
+        they're confirmed.
+      </p>
+    </div>
+  </section>
+</PageLayout>

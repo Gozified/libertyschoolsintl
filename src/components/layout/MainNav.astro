@@ -1,0 +1,115 @@
+---
+/**
+ * Main navigation, rendered from src/data/nav.ts.
+ *
+ * Accessibility notes — all of these were missing in the previous build:
+ *  - the toggler has aria-controls, aria-expanded and an accessible name
+ *  - the current page carries aria-current="page"
+ *  - the ancestor dropdown of the current page is marked .is-current
+ *  - dropdown toggles are real buttons/links with aria-expanded managed by
+ *    Bootstrap's own JS
+ */
+import { mainNav, headerCta, isActive } from '../../data/nav';
+
+const pathname = Astro.url.pathname;
+---
+
+<nav class="navbar navbar-expand-lg main-nav py-0" aria-label="Main navigation">
+  <button
+    class="navbar-toggler my-2"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#primary-navigation"
+    aria-controls="primary-navigation"
+    aria-expanded="false"
+    aria-label="Open main menu"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="primary-navigation">
+    <ul class="navbar-nav ms-lg-auto align-items-lg-center">
+      {
+        mainNav.map((item) => {
+          const active = isActive(item.href, pathname);
+
+          if (!item.children) {
+            return (
+              <li class:list={['nav-item', { 'is-current': active }]}>
+                <a
+                  class="nav-link"
+                  href={item.href}
+                  aria-current={pathname === item.href ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          }
+
+          const id = `nav-${item.label.toLowerCase().replace(/[^a-z]+/g, '-')}`;
+
+          return (
+            <li class:list={['nav-item dropdown', { 'is-current': active }]}>
+              <button
+                class="nav-link dropdown-toggle btn btn-link"
+                id={id}
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                {item.label}
+              </button>
+              <ul class="dropdown-menu" aria-labelledby={id}>
+                {item.children.map((child) => (
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href={child.href}
+                      aria-current={pathname === child.href ? 'page' : undefined}
+                    >
+                      {child.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        })
+      }
+
+      <li class="nav-item ms-lg-3 my-2 my-lg-0">
+        <a class="btn btn-accent btn-sm px-3 py-2" href={headerCta.href}>{headerCta.label}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<style lang="scss">
+  // The nav is long; on small screens the expanded menu must scroll rather
+  // than run off the bottom of a sticky header.
+  @media (max-width: 991.98px) {
+    .navbar-collapse {
+      max-height: calc(100vh - 8rem);
+      overflow-y: auto;
+      padding-bottom: 1rem;
+    }
+  }
+
+  // Dropdown toggles are <button> for keyboard semantics; strip the button
+  // chrome so they match the sibling <a class="nav-link"> exactly.
+  .nav-link.btn-link {
+    text-decoration: none;
+    border: 0;
+  }
+
+  // Open dropdowns on hover, but only for real pointing devices. Gated on
+  // (hover: hover) so touch devices don't get a menu that opens on the same
+  // tap that follows the link. Click and keyboard are handled by Bootstrap.
+  @media (min-width: 992px) and (hover: hover) and (pointer: fine) {
+    .nav-item.dropdown:hover > .dropdown-menu {
+      display: block;
+      margin-top: 0;
+    }
+  }
+</style>

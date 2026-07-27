@@ -1,0 +1,119 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import { site, addressOneLine } from '../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Contact Us"
+  crumbs={[{ label: 'Contact' }]}
+  standfirst="We'd love to hear from you — by phone, email, or in person."
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-5">
+          <SectionTitle eyebrow="Reach us" title="Get in touch" />
+
+          <ul class="list-unstyled d-flex flex-column gap-4 mt-4">
+            <li class="d-flex gap-3">
+              <Icon name="lucide:map-pin" width="22" height="22" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <div>
+                <strong class="d-block">Campus</strong>
+                <address class="mb-0" style="font-style:normal">{addressOneLine}</address>
+              </div>
+            </li>
+            <li class="d-flex gap-3">
+              <Icon name="lucide:phone" width="22" height="22" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <div>
+                <strong class="d-block">Phone</strong>
+                <a href={`tel:${site.contact.phone.href}`}>{site.contact.phone.display}</a><br />
+                <a href={`tel:${site.contact.phoneAlt.href}`}>{site.contact.phoneAlt.display}</a>
+              </div>
+            </li>
+            <li class="d-flex gap-3">
+              <Icon name="lucide:mail" width="22" height="22" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <div>
+                <strong class="d-block">Email</strong>
+                <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a><br />
+                <a href={`mailto:${site.contact.admissionsEmail}`}>{site.contact.admissionsEmail}</a>
+              </div>
+            </li>
+            <li class="d-flex gap-3">
+              <Icon name="lucide:clock" width="22" height="22" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <div>
+                <strong class="d-block">Office Hours</strong>
+                {site.contact.officeHours}
+              </div>
+            </li>
+          </ul>
+
+          <div
+            class="d-flex align-items-center justify-content-center rounded-2 mt-4 text-center p-4"
+            style="aspect-ratio:4/3;background:var(--nga-tint);border:1px dashed var(--nga-border);"
+          >
+            <div>
+              <Icon name="lucide:map" width="28" height="28" aria-hidden="true" style="color:var(--nga-muted)" />
+              <p class="text-body-secondary small mt-2 mb-1">Campus map — placeholder</p>
+              <a href={site.contact.mapsUrl} target="_blank" rel="noopener" class="small">
+                Open in Google Maps
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <SectionTitle eyebrow="Send a message" title="Contact form" />
+
+          <form
+            name="contact"
+            method="POST"
+            action="/contact"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
+            class="row g-3 mt-2"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="d-none">
+              <label>
+                Leave this field blank if you're human: <input name="bot-field" />
+              </label>
+            </p>
+
+            <div class="col-md-6">
+              <label for="contact-name" class="form-label">Your name</label>
+              <input type="text" class="form-control" id="contact-name" name="name" autocomplete="name" required />
+            </div>
+
+            <div class="col-md-6">
+              <label for="contact-email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="contact-email" name="email" autocomplete="email" required />
+            </div>
+
+            <div class="col-12">
+              <label for="department" class="form-label">Who should this go to?</label>
+              <select class="form-select" id="department" name="department" required>
+                <option value="" selected disabled>Choose a department</option>
+                <option>General Enquiry</option>
+                <option>Admissions</option>
+                <option>Primary School</option>
+                <option>Secondary School</option>
+                <option>Parents' Association</option>
+              </select>
+            </div>
+
+            <div class="col-12">
+              <label for="contact-message" class="form-label">Message</label>
+              <textarea class="form-control" id="contact-message" name="message" rows="5" required></textarea>
+            </div>
+
+            <div class="col-12 mt-3">
+              <button type="submit" class="btn btn-accent btn-lg">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

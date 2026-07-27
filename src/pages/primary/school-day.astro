@@ -1,0 +1,83 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="The School Day | Primary School"
+  section="primary"
+  description="A typical day for a Primary student at Northgate Academy, from drop-off to pickup."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="primary-classroom" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">The School Day</h1>
+      <p class="page-header__standfirst">What a typical day looks like in Primary.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { time: '7:30am', label: 'Gates open', desc: 'Drop-off and breakfast club begins.' },
+            { time: '8:00am', label: 'Registration & assembly', desc: 'The school day begins with a whole-class or year-group assembly.' },
+            { time: '8:20am – 10:30am', label: 'Morning lessons', desc: 'Core subject teaching — English, Maths and Science.' },
+            { time: '10:30am', label: 'Break', desc: 'Outdoor play and a snack.' },
+            { time: '10:50am – 12:30pm', label: 'Mid-morning lessons', desc: 'Humanities, languages and enrichment subjects.' },
+            { time: '12:30pm', label: 'Lunch', desc: 'A hot meal, followed by supervised outdoor play.' },
+            { time: '1:30pm – 3:00pm', label: 'Afternoon lessons', desc: 'Creative arts, PE and project work.' },
+            { time: '3:00pm', label: 'Pickup', desc: 'Gates open for collection; after-school clubs begin for those staying.' },
+            { time: '3:00pm – 4:30pm', label: 'After-school clubs', desc: 'Optional clubs — sport, music, coding and more.' },
+          ].map((item, i) => (
+            <div class="col-12">
+              <div class="d-flex gap-4 align-items-start pb-4 mb-4" style={i < 8 ? 'border-bottom:1px solid var(--nga-border)' : undefined}>
+                <div class="flex-shrink-0" style="min-width:9rem;">
+                  <span class="fw-semibold" style="color:var(--nga-accent-strong)">{item.time}</span>
+                </div>
+                <div>
+                  <h3 class="h6 mb-1">{item.label}</h3>
+                  <p class="text-body-secondary small mb-0">{item.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-3">
+        Placeholder schedule — timings vary slightly by year group and will be confirmed with your
+        child's class teacher.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="Good to know" title="Uniform, meals & transport" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { icon: 'lucide:shirt', title: 'Uniform', desc: 'A full uniform list is provided at enrolment, with a PE kit worn on activity days.' },
+            { icon: 'lucide:utensils', title: 'Meals', desc: 'A hot lunch is provided daily; the weekly menu is shared with parents in advance.' },
+            { icon: 'lucide:bus', title: 'Transport', desc: 'A school bus service covers several routes across the city — ask admissions for details.' },
+          ].map((item) => (
+            <div class="col-md-4">
+              <div class="feature text-center">
+                <div class="feature__icon mx-auto" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</SectionLayout>

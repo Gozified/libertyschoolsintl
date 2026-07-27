@@ -1,0 +1,58 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Examination Results | Secondary School"
+  section="secondary"
+  description="Northgate Academy examination outcomes at WAEC and IGCSE."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="secondary-seminar" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Examination Results</h1>
+      <p class="page-header__standfirst">Outcomes our students have achieved at WAEC and IGCSE.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4 text-center">
+        {
+          [
+            { value: '98%', label: 'Five or more credits at WAEC' },
+            { value: '92%', label: 'A*–C at IGCSE' },
+            { value: '100%', label: 'Progressed to university or further study' },
+          ].map((stat) => (
+            <div class="col-md-4">
+              <div class="stat__value">{stat.value}</div>
+              <div class="stat__label" style="color:var(--nga-accent-strong)">{stat.label}</div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-4 text-center">
+        Placeholder figures — to be replaced with verified results once supplied by the school and
+        updated after each examination cycle.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container measure mx-auto">
+      <SectionTitle eyebrow="Our approach" title="Results in context" align="center" />
+      <div class="prose mt-4">
+        <p>
+          We measure success by more than a single set of results. Strong examination outcomes
+          matter because they open doors — to university, to careers, to choices — and we take
+          that seriously. But we also track how far each student has come from where they started,
+          not only where they land.
+        </p>
+      </div>
+    </div>
+  </section>
+</SectionLayout>

@@ -1,0 +1,75 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="Beyond the Classroom | Primary School"
+  section="primary"
+  description="Clubs, sport, music and trips for Primary students at Northgate Academy."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="sports-field" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Beyond the Classroom</h1>
+      <p class="page-header__standfirst">Clubs, sport, music and trips that round out a Northgate education.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        eyebrow="Something for everyone"
+        title="Clubs & activities"
+        standfirst="Every Primary student is encouraged to try something new. Our after-school programme runs most afternoons and changes each term."
+      />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { icon: 'lucide:trophy', title: 'Sport', desc: 'Football, athletics, swimming and inter-house competitions.' },
+            { icon: 'lucide:music', title: 'Music', desc: 'Choir, recorder club, and beginner instrument lessons.' },
+            { icon: 'lucide:palette', title: 'Art & Craft', desc: 'A relaxed, creative space to paint, build and design.' },
+            { icon: 'lucide:laptop', title: 'Coding Club', desc: 'Beginner-friendly game and app design.' },
+            { icon: 'lucide:book-open', title: 'Reading Club', desc: 'Book talk, author studies and a love of stories.' },
+            { icon: 'lucide:sprout', title: 'Eco Club', desc: 'The school garden, recycling projects and nature walks.' },
+          ].map((item) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature">
+                <div class="feature__icon" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <PlaceholderImage name="event-culture-day" alt="Primary students at a school event" class="rounded-2" />
+        </div>
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Off campus" title="Trips & events" />
+          <div class="prose">
+            <p>
+              Learning doesn't stop at the school gate. Each year group takes part in
+              curriculum-linked trips — museums, farms, nature reserves — and the whole Primary
+              section comes together for events like Sports Day, Culture Day and the end-of-year
+              production.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</SectionLayout>

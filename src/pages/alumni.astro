@@ -1,0 +1,73 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../components/ui/PlaceholderImage.astro';
+import { site } from '../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Alumni"
+  crumbs={[{ label: 'Alumni' }]}
+  standfirst="Once a Northgate student, always part of the community."
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Stay connected" title="Our alumni network" />
+          <div class="prose">
+            <p>
+              Northgate graduates go on to universities and careers across Nigeria and around the
+              world. We love staying in touch — hearing where alumni have landed, inviting them
+              back to speak with current students, and bringing the community together at reunions.
+            </p>
+          </div>
+          <a class="btn btn-primary mt-2" href={`mailto:${site.contact.email}`}>
+            Update Your Details
+          </a>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="alumnus-1" alt="Northgate alumni at a reunion event" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:users-round', title: 'Reunions', desc: 'Periodic gatherings to reconnect with old classmates and staff.' },
+            { icon: 'lucide:mic', title: 'Guest Speaking', desc: 'Come back and share your journey with current students.' },
+            { icon: 'lucide:handshake', title: 'Mentorship', desc: 'Support current students through mentoring and career advice.' },
+          ].map((item) => (
+            <div class="col-md-4">
+              <div class="feature text-center">
+                <div class="feature__icon mx-auto" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container measure mx-auto text-center">
+      <SectionTitle eyebrow="Alumni voices" title="Where they are now" align="center" />
+      <blockquote class="prose mt-4">
+        <p class="lead">
+          "Placeholder testimonial — a real story from a Northgate graduate will go here once
+          supplied."
+        </p>
+        <footer class="text-body-secondary small mt-2">— Placeholder Alumnus, Class of 20XX</footer>
+      </blockquote>
+    </div>
+  </section>
+</PageLayout>

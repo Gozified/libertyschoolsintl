@@ -1,0 +1,49 @@
+---
+/**
+ * Gallery preview — pulls the featured items from the same collection that
+ * drives the full /gallery page, so the homepage teaser can't fall out of
+ * sync with what's actually in the gallery.
+ */
+import { getCollection } from 'astro:content';
+import SectionTitle from '../ui/SectionTitle.astro';
+
+const featured = await getCollection('gallery', ({ data }) => data.featured);
+const thumbs = (featured.length >= 6 ? featured : await getCollection('gallery')).slice(0, 6);
+---
+
+<section class="section section-tint">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Community"
+      title="Life at Northgate"
+      standfirst="A snapshot of our school in action."
+      align="center"
+    />
+
+    <div class="row g-3 mt-5">
+      {
+        thumbs.map((item) => (
+          <div class="col-6 col-md-4">
+            <a class="gallery-item" href="/gallery">
+              <img
+                src={item.data.image.src}
+                alt={item.data.image.alt}
+                width="900"
+                height="600"
+                class="ratio-card"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-5 text-center">
+      <a class="btn btn-accent btn-lg" href="/gallery">
+        Explore the full gallery
+      </a>
+    </div>
+  </div>
+</section>

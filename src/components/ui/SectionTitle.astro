@@ -1,0 +1,46 @@
+---
+interface Props {
+  /** Small uppercase kicker above the heading. */
+  eyebrow?: string;
+  title: string;
+  /** Supporting sentence below the rule. */
+  standfirst?: string;
+  /** Heading level — keep the document outline correct per page. */
+  as?: 'h1' | 'h2' | 'h3';
+  align?: 'start' | 'center';
+  onInk?: boolean;
+  class?: string;
+}
+
+const {
+  eyebrow,
+  title,
+  standfirst,
+  as: Tag = 'h2',
+  align = 'start',
+  onInk = false,
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'section-title',
+    { 'section-title--center': align === 'center', 'section-title--on-ink': onInk },
+    className,
+  ]}
+>
+  {eyebrow && <span class="section-title__eyebrow">{eyebrow}</span>}
+  <Tag class="mb-0">{title}</Tag>
+  <span class="section-title__rule" aria-hidden="true"></span>
+  {
+    standfirst && (
+      <p
+        class:list={['lead mt-3 mb-0 measure', { 'mx-auto': align === 'center' }]}
+        style={onInk ? 'color:rgba(255,255,255,.82)' : undefined}
+      >
+        {standfirst}
+      </p>
+    )
+  }
+</div>

@@ -1,0 +1,59 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+
+const steps = [
+  { title: 'Make an enquiry', desc: 'Tell us a little about your child using our online form, by phone, or by email.' },
+  { title: 'Visit the school', desc: 'We’ll invite you for a tour of the campus and a conversation with admissions.' },
+  { title: 'Assessment', desc: 'An age-appropriate assessment — informal for Primary, a short written test and interview for Secondary.' },
+  { title: 'Offer & enrolment', desc: 'If it’s the right fit, we’ll make an offer and guide you through enrolment paperwork and fees.' },
+  { title: 'Welcome to Northgate', desc: 'Your child joins their new class, with an induction to help them settle in quickly.' },
+];
+---
+
+<PageLayout
+  title="How to Apply | Admissions"
+  crumbs={[{ label: 'Admissions', href: '/admissions' }, { label: 'How to Apply' }]}
+  standfirst="Five steps from first enquiry to your child's first day."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      {
+        steps.map((step, i) => (
+          <div class="d-flex gap-4 align-items-start pb-4 mb-4" style={i < steps.length - 1 ? 'border-bottom:1px solid var(--nga-border)' : undefined}>
+            <div
+              class="flex-shrink-0 d-flex align-items-center justify-content-center rounded-circle fw-bold"
+              style="width:2.75rem;height:2.75rem;background:var(--nga-accent-soft);color:var(--nga-accent-strong);"
+            >
+              {i + 1}
+            </div>
+            <div>
+              <h2 class="h5 mb-1">{step.title}</h2>
+              <p class="text-body-secondary mb-0">{step.desc}</p>
+            </div>
+          </div>
+        ))
+      }
+
+      <div class="text-center mt-5">
+        <a class="btn btn-accent btn-lg" href="/admissions/enquire">Start with an Enquiry</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container measure mx-auto">
+      <SectionTitle eyebrow="Have documents ready" title="What you'll need" align="center" />
+      <ul class="tick-list mt-5 mx-auto" style="max-width:520px;">
+        <li>Child's birth certificate</li>
+        <li>Recent passport photographs</li>
+        <li>Previous school report(s), where applicable</li>
+        <li>Immunisation record</li>
+        <li>Completed application form</li>
+      </ul>
+      <p class="text-body-secondary small mt-3 text-center">
+        Placeholder checklist — confirmed document requirements will replace this once supplied.
+      </p>
+    </div>
+  </section>
+</PageLayout>

@@ -1,0 +1,51 @@
+---
+/**
+ * Standard inner page: base shell + banner with breadcrumb and page title.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Breadcrumb from '../components/layout/Breadcrumb.astro';
+import PlaceholderImage from '../components/ui/PlaceholderImage.astro';
+import type { PlaceholderName } from '../lib/placeholder';
+import type { SectionKey } from '../data/sections';
+
+interface Props {
+  title: string;
+  /** Overrides the <title>/meta heading if the H1 wording should differ. */
+  heading?: string;
+  description?: string;
+  standfirst?: string;
+  crumbs: Array<{ label: string; href?: string }>;
+  banner?: PlaceholderName;
+  section?: SectionKey;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  heading,
+  description,
+  standfirst,
+  crumbs,
+  banner = 'page-banner',
+  section,
+  noindex,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description} section={section} noindex={noindex}>
+  <slot name="head" slot="head" />
+  <slot name="subnav" slot="subnav" />
+
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name={banner} alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <Breadcrumb items={crumbs} />
+      <h1 class="page-header__title">{heading ?? title}</h1>
+      {standfirst && <p class="page-header__standfirst">{standfirst}</p>}
+    </div>
+  </div>
+
+  <slot />
+</BaseLayout>

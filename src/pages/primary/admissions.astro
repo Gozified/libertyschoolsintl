@@ -1,0 +1,51 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Primary Admissions | Northgate Academy"
+  section="primary"
+  description="How to apply for a Primary place at Northgate Academy, ages 3 to 11."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="primary-playground" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Primary Admissions</h1>
+      <p class="page-header__standfirst">Joining Northgate from Nursery to Primary 6.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-7">
+          <SectionTitle eyebrow="Entry points" title="When children can join" />
+          <div class="prose">
+            <p>
+              While most children join us in Nursery, we welcome new students into any Primary
+              year group where space allows, subject to an informal assessment and a place being
+              available. Our full, school-wide admissions process — including required documents,
+              fees and how to apply — is covered on the main <a href="/admissions">Admissions</a> pages.
+            </p>
+            <p>
+              For Primary specifically, we look for children who are curious, kind, and ready to
+              be part of a community — the assessment is informal and low-pressure, usually a short
+              classroom visit rather than a formal exam.
+            </p>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a class="btn btn-primary" href="/admissions/process">How to Apply</a>
+            <a class="btn btn-outline-primary" href="/admissions/enquire">Make an Enquiry</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <PlaceholderImage name="primary-classroom" alt="Primary students during a lesson" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+</SectionLayout>

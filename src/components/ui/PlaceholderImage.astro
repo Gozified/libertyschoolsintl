@@ -1,0 +1,35 @@
+---
+/**
+ * Renders a generated placeholder with explicit width/height (no layout shift)
+ * and real alt text.
+ *
+ * `alt` is required by the type — describe the photo that WILL go here, so the
+ * alt text survives the swap to real photography. Pass alt="" only when the
+ * image is genuinely decorative.
+ */
+import { placeholder, type PlaceholderName } from '../../lib/placeholder';
+
+interface Props {
+  name: PlaceholderName;
+  alt: string;
+  class?: string;
+  /** Above-the-fold images should not be lazy-loaded. */
+  eager?: boolean;
+  sizes?: string;
+}
+
+const { name, alt, class: className, eager = false, sizes } = Astro.props;
+const { src, width, height } = placeholder(name);
+---
+
+<img
+  src={src}
+  width={width}
+  height={height}
+  alt={alt}
+  class={className}
+  sizes={sizes}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding={eager ? 'sync' : 'async'}
+  fetchpriority={eager ? 'high' : undefined}
+/>

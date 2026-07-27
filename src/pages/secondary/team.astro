@@ -1,0 +1,63 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Our Team | Secondary School"
+  section="secondary"
+  description="Meet the teaching staff leading Secondary at Northgate Academy."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="secondary-lab" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Our Team</h1>
+      <p class="page-header__standfirst">The people who make Secondary at Northgate what it is.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="Leadership" title="Secondary leadership" align="center" />
+      <div class="row g-4 mt-5 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift text-center">
+            <PlaceholderImage name="staff-portrait-3" alt="Michael Chen, Head of Secondary" class="card-img-top object-cover ratio-portrait" />
+            <div class="card-body">
+              <h3 class="h6 mb-1">Michael Chen</h3>
+              <p class="text-body-secondary small mb-0">Head of Secondary</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="By department" title="Heads of department" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { name: 'Placeholder Teacher', role: 'Head of Sciences' },
+            { name: 'Placeholder Teacher', role: 'Head of Mathematics' },
+            { name: 'Placeholder Teacher', role: 'Head of Humanities' },
+            { name: 'Placeholder Teacher', role: 'Head of Languages' },
+          ].map((person) => (
+            <div class="col-6 col-lg-3 text-center">
+              <PlaceholderImage name="staff-portrait-4" alt={`${person.name}, ${person.role}`} class="rounded-2 object-cover ratio-portrait" />
+              <h3 class="h6 mt-3 mb-0">{person.name}</h3>
+              <p class="text-body-secondary small">{person.role}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-4 text-center">
+        Full staff listing and photos to be added once supplied by the school.
+      </p>
+    </div>
+  </section>
+</SectionLayout>

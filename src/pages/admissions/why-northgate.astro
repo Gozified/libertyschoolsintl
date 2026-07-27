@@ -1,0 +1,51 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Why Northgate | Admissions"
+  crumbs={[{ label: 'Admissions', href: '/admissions' }, { label: 'Why Northgate' }]}
+  standfirst="What families tell us they value most about choosing Northgate Academy."
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:users', title: 'Small Classes', desc: 'Low teacher-to-student ratios mean every child is known, not just taught.' },
+            { icon: 'lucide:heart-handshake', title: 'Genuine Pastoral Care', desc: 'Academic ambition sits alongside real attention to wellbeing.' },
+            { icon: 'lucide:graduation-cap', title: 'Strong Academic Outcomes', desc: 'Consistent results at WAEC and IGCSE, and a clear pathway to university.' },
+            { icon: 'lucide:palette', title: 'A Broad Education', desc: 'Sport, the arts, leadership and service alongside the core curriculum.' },
+            { icon: 'lucide:shield-check', title: 'One Campus, One Community', desc: 'Primary and Secondary share a site, so siblings grow up in one community.' },
+            { icon: 'lucide:trending-up', title: 'A Track Record', desc: 'Over 25 years of teaching families across Lagos.' },
+          ].map((item) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature">
+                <div class="feature__icon" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container measure mx-auto">
+      <SectionTitle eyebrow="In their words" title="What parents say" align="center" />
+      <blockquote class="prose mt-4 text-center">
+        <p class="lead">
+          "Placeholder testimonial — a real quote from a Northgate parent will go here once
+          supplied."
+        </p>
+        <footer class="text-body-secondary small mt-2">— Placeholder Parent Name</footer>
+      </blockquote>
+    </div>
+  </section>
+</PageLayout>

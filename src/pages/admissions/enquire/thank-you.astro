@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { site } from '../../../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout
+  title="Thank You | Northgate Academy"
+  description="Your admissions enquiry has been received."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container measure mx-auto text-center">
+      <Icon name="lucide:check-circle-2" width="56" height="56" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+      <h1 class="h2 mt-4">Thank you for your enquiry</h1>
+      <p class="lead text-body-secondary mt-3">
+        We've received your details and a member of our admissions team will be in touch within
+        two working days.
+      </p>
+      <p class="text-body-secondary">
+        In the meantime, if anything is urgent, call us on
+        <a href={`tel:${site.contact.phone.href}`}>{site.contact.phone.display}</a>
+        or email <a href={`mailto:${site.contact.admissionsEmail}`}>{site.contact.admissionsEmail}</a>.
+      </p>
+      <a class="btn btn-primary mt-3" href="/">Back to Homepage</a>
+    </div>
+  </section>
+</BaseLayout>

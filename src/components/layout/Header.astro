@@ -1,0 +1,50 @@
+---
+import { Icon } from 'astro-icon/components';
+import { site } from '../../data/site';
+import { portals } from '../../data/nav';
+import Brand from './Brand.astro';
+import MainNav from './MainNav.astro';
+---
+
+<!--
+  Utility bar. Unlike the previous build it is NOT hidden on mobile — hiding
+  the phone number below md made the school unreachable on the devices most
+  parents actually use. Instead the portal links drop away and the contact
+  details stay.
+-->
+<div class="topbar">
+  <div class="container d-flex flex-wrap align-items-center justify-content-between gap-2 py-2">
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <a href={`tel:${site.contact.phone.href}`} class="d-inline-flex align-items-center gap-2">
+        <Icon name="lucide:phone" width="14" height="14" />
+        <span>{site.contact.phone.display}</span>
+      </a>
+      <a
+        href={`mailto:${site.contact.email}`}
+        class="d-none d-sm-inline-flex align-items-center gap-2"
+      >
+        <Icon name="lucide:mail" width="14" height="14" />
+        <span>{site.contact.email}</span>
+      </a>
+    </div>
+
+    <ul class="nav d-none d-lg-flex align-items-center gap-1 mb-0">
+      {
+        portals.map((portal) => (
+          <li class="nav-item">
+            <a class="nav-link px-2 py-0 small" href={portal.href} style="color:inherit">
+              {portal.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<header class="site-header" data-header>
+  <div class="container d-flex align-items-center justify-content-between gap-3">
+    <Brand />
+    <MainNav />
+  </div>
+</header>

@@ -1,0 +1,91 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="Early Years | Primary School"
+  section="primary"
+  description="Nursery and Reception at Northgate Academy: a gentle, play-rich start to school."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="primary-playground" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Early Years</h1>
+      <p class="page-header__standfirst">Nursery and Reception — ages 3 to 5.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle
+            eyebrow="Where it all begins"
+            title="A gentle, joyful start"
+            standfirst="Before Primary 1, children join us in Nursery and Reception — a warm, structured environment built around play, language and confidence."
+          />
+          <div class="prose">
+            <p>
+              Our Early Years programme follows a play-based approach, giving children the
+              chance to explore, ask questions, and build the social and emotional foundations
+              they will draw on for the rest of their schooling. Days are structured but
+              unhurried, with dedicated time for stories, outdoor play, and guided discovery.
+            </p>
+            <p>
+              Staff-to-child ratios are kept deliberately low at this stage, and every child's
+              progress is tracked closely so that the move into Primary 1 feels like a natural
+              next step, not a leap.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="primary-art" alt="Early Years children at a craft table" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="The seven areas" title="What Early Years covers" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { icon: 'lucide:message-circle', title: 'Communication & Language', desc: 'Listening, speaking and building vocabulary through conversation and story.' },
+            { icon: 'lucide:dumbbell', title: 'Physical Development', desc: 'Gross and fine motor skills — from running and climbing to holding a pencil.' },
+            { icon: 'lucide:heart', title: 'Personal, Social & Emotional', desc: 'Confidence, self-regulation, and forming healthy relationships with others.' },
+            { icon: 'lucide:book-open', title: 'Literacy', desc: 'Early phonics, mark-making, and a genuine love of books.' },
+            { icon: 'lucide:calculator', title: 'Numeracy', desc: 'Number, shape, pattern and measure, grounded in hands-on activity.' },
+            { icon: 'lucide:globe', title: 'Understanding the World', desc: 'People, places, technology and the natural world around them.' },
+            { icon: 'lucide:palette', title: 'Expressive Arts & Design', desc: 'Art, music, movement and imaginative play.' },
+          ].map((area) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature">
+                <div class="feature__icon" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={area.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{area.title}</h3>
+                <p class="text-body-secondary small mb-0">{area.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-ink">
+    <div class="container text-center">
+      <h2 class="h3 mb-3" style="color:#fff">Curious about Early Years?</h2>
+      <p class="lead mb-4" style="color:rgba(255,255,255,.85)">
+        Book a visit and see a typical Nursery or Reception day for yourself.
+      </p>
+      <a class="btn btn-accent btn-lg" href="/admissions/enquire">Make an Enquiry</a>
+    </div>
+  </section>
+</SectionLayout>

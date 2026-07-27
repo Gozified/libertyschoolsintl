@@ -1,0 +1,228 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+
+const items = await getCollection('gallery');
+// Categories are derived from the data itself — the previous build hand-mirrored
+// a fixed category list in both the data and the filter buttons, and they drifted.
+const categories = ['All', ...new Set(items.map((i) => i.data.category))];
+---
+
+<PageLayout
+  title="Gallery"
+  crumbs={[{ label: 'Gallery' }]}
+  standfirst="A look at life across Northgate Academy — campus, classrooms and community."
+  banner="campus-grounds"
+>
+  <section class="section">
+    <div class="container">
+      <div class="d-flex flex-wrap gap-2 mb-3" role="group" aria-label="Filter gallery by category">
+        {
+          categories.map((cat, i) => (
+            <button
+              type="button"
+              class="btn btn-sm"
+              class:list={[i === 0 ? 'btn-accent' : 'btn-outline-primary']}
+              data-gallery-filter={cat}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <p class="visually-hidden" role="status" data-gallery-count></p>
+
+      <div class="row g-3" data-gallery-grid>
+        {
+          items.map((item, i) => (
+            <div class="col-6 col-md-4 col-lg-3" data-gallery-cell data-category={item.data.category}>
+              <button
+                type="button"
+                class="gallery-item"
+                data-lightbox-trigger
+                data-index={i}
+                aria-label={`View larger image: ${item.data.image.alt}`}
+              >
+                <img
+                  src={item.data.image.src}
+                  alt=""
+                  width="900"
+                  height="600"
+                  class="ratio-card"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </button>
+            </div>
+          ))
+        }
+      </div>
+
+      {
+        items.length === 0 && (
+          <p class="text-body-secondary text-center py-5">No photos added yet — check back soon.</p>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- Lightbox — hidden by default, populated and shown by the script below.
+       role="dialog" + aria-modal keeps a screen reader from reading the page
+       behind it; focus is trapped inside and restored to the trigger on close. -->
+  <div class="lightbox" data-lightbox hidden>
+    <div class="lightbox__backdrop" data-lightbox-backdrop></div>
+    <div
+      class="lightbox__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image viewer"
+      data-lightbox-dialog
+    >
+      <button type="button" class="lightbox__close" data-lightbox-close aria-label="Close image viewer">
+        <Icon name="lucide:x" width="22" height="22" aria-hidden="true" />
+      </button>
+      <button type="button" class="lightbox__nav lightbox__nav--prev" data-lightbox-prev aria-label="Previous image">
+        <Icon name="lucide:chevron-left" width="26" height="26" aria-hidden="true" />
+      </button>
+      <figure class="lightbox__figure">
+        <img data-lightbox-image src="" alt="" />
+        <figcaption class="lightbox__caption">
+          <span data-lightbox-caption></span>
+          <span class="lightbox__count" data-lightbox-position></span>
+        </figcaption>
+      </figure>
+      <button type="button" class="lightbox__nav lightbox__nav--next" data-lightbox-next aria-label="Next image">
+        <Icon name="lucide:chevron-right" width="26" height="26" aria-hidden="true" />
+      </button>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  // ── Category filter ──────────────────────────────────────────────────────
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-gallery-filter]');
+  const cells = document.querySelectorAll<HTMLElement>('[data-gallery-cell]');
+  const countStatus = document.querySelector<HTMLElement>('[data-gallery-count]');
+
+  function applyFilter(category: string) {
+    let visible = 0;
+    cells.forEach((cell) => {
+      const match = category === 'All' || cell.dataset.category === category;
+      cell.hidden = !match;
+      if (match) visible += 1;
+    });
+    if (countStatus) countStatus.textContent = `Showing ${visible} of ${cells.length} photos`;
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      filterButtons.forEach((b) => {
+        b.classList.toggle('btn-accent', b === button);
+        b.classList.toggle('btn-outline-primary', b !== button);
+        b.setAttribute('aria-pressed', String(b === button));
+      });
+      applyFilter(button.dataset.galleryFilter ?? 'All');
+    });
+  });
+
+  // ── Lightbox ──────────────────────────────────────────────────────────────
+  // Dependency-free by design — one feature doesn't justify a library. Handles
+  // focus trap, Escape to close, arrow-key navigation, and restores focus to
+  // the thumbnail that opened it.
+  interface Slide {
+    src: string;
+    alt: string;
+  }
+
+  const triggers = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-lightbox-trigger]'));
+  const slides: Slide[] = triggers.map((trigger) => {
+    const img = trigger.querySelector('img');
+    return { src: img?.getAttribute('src') ?? '', alt: trigger.getAttribute('aria-label')?.replace('View larger image: ', '') ?? '' };
+  });
+
+  const dialog = document.querySelector<HTMLElement>('[data-lightbox]');
+  const dialogPanel = document.querySelector<HTMLElement>('[data-lightbox-dialog]');
+  const backdrop = document.querySelector<HTMLElement>('[data-lightbox-backdrop]');
+  const image = document.querySelector<HTMLImageElement>('[data-lightbox-image]');
+  const caption = document.querySelector<HTMLElement>('[data-lightbox-caption]');
+  const position = document.querySelector<HTMLElement>('[data-lightbox-position]');
+  const closeBtn = document.querySelector<HTMLButtonElement>('[data-lightbox-close]');
+  const prevBtn = document.querySelector<HTMLButtonElement>('[data-lightbox-prev]');
+  const nextBtn = document.querySelector<HTMLButtonElement>('[data-lightbox-next]');
+
+  if (dialog && dialogPanel && backdrop && image && caption && position && closeBtn && prevBtn && nextBtn && slides.length > 0) {
+    let currentIndex = 0;
+    let lastFocused: HTMLElement | null = null;
+
+    const focusable = [prevBtn, nextBtn, closeBtn];
+
+    function render() {
+      const slide = slides[currentIndex];
+      image!.src = slide.src;
+      image!.alt = slide.alt;
+      caption!.textContent = slide.alt;
+      position!.textContent = `${currentIndex + 1} of ${slides.length}`;
+    }
+
+    function open(index: number, trigger: HTMLElement) {
+      currentIndex = index;
+      lastFocused = trigger;
+      render();
+      dialog!.hidden = false;
+      document.body.style.overflow = 'hidden';
+      closeBtn!.focus();
+      document.addEventListener('keydown', onKeydown);
+    }
+
+    function close() {
+      dialog!.hidden = true;
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKeydown);
+      lastFocused?.focus();
+    }
+
+    function step(delta: number) {
+      currentIndex = (currentIndex + delta + slides.length) % slides.length;
+      render();
+    }
+
+    function onKeydown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+        return;
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        step(-1);
+        return;
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        step(1);
+        return;
+      }
+      if (e.key === 'Tab') {
+        // Simple focus trap across the dialog's three controls.
+        const current = focusable.indexOf(document.activeElement as HTMLButtonElement);
+        e.preventDefault();
+        const nextIndex = e.shiftKey
+          ? (current - 1 + focusable.length) % focusable.length
+          : (current + 1) % focusable.length;
+        focusable[nextIndex < 0 ? 0 : nextIndex]?.focus();
+      }
+    }
+
+    triggers.forEach((trigger, i) => {
+      trigger.addEventListener('click', () => open(i, trigger));
+    });
+
+    closeBtn.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
+    prevBtn.addEventListener('click', () => step(-1));
+    nextBtn.addEventListener('click', () => step(1));
+  }
+</script>

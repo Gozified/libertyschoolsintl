@@ -1,0 +1,74 @@
+---
+/**
+ * The single page shell. Every route uses this (directly or via PageLayout),
+ * so the header, footer, <head> and accessibility baseline exist in exactly
+ * one place — the fix for the previous build's 13 duplicated, drifted copies.
+ */
+import '@fontsource-variable/inter/wght.css';
+import '@fontsource-variable/fraunces/wght.css';
+import '../styles/main.scss';
+
+import { site } from '../data/site';
+import type { SectionKey } from '../data/sections';
+import Meta from '../components/seo/Meta.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  appendSiteName?: boolean;
+  /** Sets the microsite accent for the whole page. */
+  section?: SectionKey;
+  bodyClass?: string;
+}
+
+const { title, description, image, noindex, appendSiteName, section, bodyClass } = Astro.props;
+---
+
+<!doctype html>
+<html
+  lang={site.locale}
+  data-section={section}
+  data-placeholder-outline={site.showPlaceholderOutlines ? 'on' : undefined}
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#1e3a6b" />
+    <Meta
+      title={title}
+      description={description}
+      image={image}
+      noindex={noindex}
+      appendSiteName={appendSiteName}
+    />
+    <slot name="head" />
+  </head>
+
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <Header />
+
+    <slot name="subnav" />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      // Import only the Bootstrap components in use rather than the full
+      // bundle. Each module registers its own data-API handlers on import, so
+      // data-bs-toggle keeps working. Add components here as phases need them.
+      import 'bootstrap/js/dist/collapse'; // navbar toggle, accordions
+      import 'bootstrap/js/dist/dropdown'; // main navigation
+      import '../scripts/ui';
+    </script>
+  </body>
+</html>

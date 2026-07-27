@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 500" width="1600" height="500" role="img" aria-label="Placeholder: Campus exterior">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d3ddee"/>
+      <stop offset="1" stop-color="#b3c4de"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="500" fill="url(#g)"/>
+  <rect x="8" y="8" width="1584" height="484" fill="none" stroke="#5a7cba" stroke-width="3" stroke-dasharray="14 10"/>
+  <g transform="translate(800 178.5)" fill="none" stroke="#2a4880" stroke-width="4.550000000000001" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-32.5" y="-22.1" width="65" height="46.8" rx="6.5"/>
+    <circle cx="0" cy="0" r="13"/>
+    <path d="M-11.7 -22.1 l5.85 -8.450000000000001 h11.7 l5.85 8.450000000000001"/>
+  </g>
+  <text x="800" y="277.9" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="31" font-weight="600" fill="#0f1d3d">Campus exterior</text>
+  <text x="800" y="314" text-anchor="middle" font-family="system-ui, sans-serif" font-size="19" font-weight="600" fill="#2a4880" letter-spacing="2">PLACEHOLDER · 16:5 · 1600×500</text>
+</svg>

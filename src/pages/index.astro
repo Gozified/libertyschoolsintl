@@ -1,0 +1,66 @@
+---
+/**
+ * Homepage — the entry point to the school website.
+ *
+ * Architecture: shared BaseLayout (header, footer, skip link, <main>),
+ * plus homepage-specific components. The entire page structure lives in
+ * components/, so it stays maintainable and the Astro file is a readable list
+ * of sections rather than a 500-line template.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/home/Hero.astro';
+import PortalStrip from '../components/home/PortalStrip.astro';
+import AtAGlance from '../components/home/AtAGlance.astro';
+import Programmes from '../components/home/Programmes.astro';
+import NewsEvents from '../components/home/NewsEvents.astro';
+import GalleryStrip from '../components/home/GalleryStrip.astro';
+import CtaBand from '../components/home/CtaBand.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title={site.name}
+  description={site.description}
+  appendSiteName={false}
+>
+  <Hero>
+    <p class="section-title__eyebrow" style="color:var(--nga-accent)">Welcome</p>
+    <h1 class="hero__title">An education that lasts a lifetime</h1>
+    <p class="hero__standfirst">
+      Northgate Academy is a day school for ages 5–18 combining academic rigour
+      with genuine pastoral care. Small classes, strong values, and every child
+      known by name.
+    </p>
+    <div class="d-flex flex-wrap gap-3">
+      <a class="btn btn-accent btn-lg" href="/admissions/enquire">Make an Enquiry</a>
+      <a class="btn btn-on-ink btn-lg" href="/about">Learn More</a>
+    </div>
+  </Hero>
+
+  <PortalStrip overlap />
+
+  <AtAGlance headline="Who we are" />
+
+  <Programmes />
+
+  {site.stats.enabled && (
+    <section class="section-tight section-ink">
+      <div class="container">
+        <div class="row g-4 text-center">
+          {site.stats.items.map((stat) => (
+            <div class="col-6 col-lg-3">
+              <span class="stat__value">{stat.value}</span>
+              <span class="stat__label">{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <NewsEvents />
+
+  <GalleryStrip />
+
+  <CtaBand />
+</BaseLayout>

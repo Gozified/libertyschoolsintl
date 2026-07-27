@@ -1,0 +1,52 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+---
+
+<PageLayout
+  title="Governance | About Us"
+  crumbs={[{ label: 'About', href: '/about' }, { label: 'Governance' }]}
+  standfirst="How Northgate Academy is owned, governed and held to account."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="prose">
+        <p>
+          Northgate Academy is a private day school owned and operated as an independent
+          institution. Strategic oversight sits with a Board of Governors, who meet regularly to
+          review academic performance, finances, safeguarding, and the school's long-term
+          direction. Day-to-day leadership is delegated to the Head of School and the senior
+          leadership team — see our <a href="/about/leadership">Leadership</a> page.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="Oversight" title="Board of Governors" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { name: 'Placeholder Name', role: 'Chair of Governors' },
+            { name: 'Placeholder Name', role: 'Governor — Finance' },
+            { name: 'Placeholder Name', role: 'Governor — Academic Standards' },
+            { name: 'Placeholder Name', role: 'Governor — Safeguarding Lead' },
+          ].map((person) => (
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100">
+                <div class="card-body text-center">
+                  <h3 class="h6 mb-1">{person.name}</h3>
+                  <p class="text-body-secondary small mb-0">{person.role}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-4 text-center">
+        Placeholder board listing — to be replaced with real names once supplied by the school.
+      </p>
+    </div>
+  </section>
+</PageLayout>

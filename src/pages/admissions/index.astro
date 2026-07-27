@@ -1,0 +1,72 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Admissions"
+  crumbs={[{ label: 'Admissions' }]}
+  standfirst="Everything you need to join the Northgate community, from first enquiry to first day."
+  banner="hero-campus"
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Start here" title="Joining Northgate Academy" />
+          <div class="prose">
+            <p>
+              We welcome applications for both Primary and Secondary throughout the year, subject
+              to space. The process is designed to be straightforward: an enquiry, a visit, a
+              short assessment, and — if it's the right fit for everyone — an offer of a place.
+            </p>
+          </div>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a class="btn btn-accent btn-lg" href="/admissions/enquire">Make an Enquiry</a>
+            <a class="btn btn-outline-primary btn-lg" href="/admissions/process">How to Apply</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="campus-exterior" alt="Northgate Academy campus" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:sparkles', title: 'Why Northgate', desc: 'What makes our school the right choice for your family.', href: '/admissions/why-northgate' },
+            { icon: 'lucide:list-checks', title: 'How to Apply', desc: 'A clear, step-by-step walk through the process.', href: '/admissions/process' },
+            { icon: 'lucide:wallet', title: 'Fees', desc: 'Tuition and what is included, by section.', href: '/admissions/fees' },
+            { icon: 'lucide:circle-help', title: 'Questions Parents Ask', desc: 'Straight answers to the questions we hear most.', href: '/admissions/faqs' },
+          ].map((item) => (
+            <div class="col-md-6 col-lg-3">
+              <a href={item.href} class="card card-lift h-100 text-decoration-none">
+                <div class="card-body">
+                  <Icon name={item.icon} width="24" height="24" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+                  <h3 class="h6 mt-3">{item.title}</h3>
+                  <p class="text-body-secondary small mb-0">{item.desc}</p>
+                </div>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-ink">
+    <div class="container text-center">
+      <h2 class="h3 mb-3" style="color:#fff">Ready to take the first step?</h2>
+      <p class="lead mb-4" style="color:rgba(255,255,255,.85)">
+        Send us an enquiry and our admissions team will be in touch within two working days.
+      </p>
+      <a class="btn btn-accent btn-lg" href="/admissions/enquire">Make an Enquiry</a>
+    </div>
+  </section>
+</PageLayout>

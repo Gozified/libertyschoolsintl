@@ -1,0 +1,40 @@
+---
+/**
+ * Quick-access strip that overlaps the hero.
+ *
+ * Each card carries an explicit aria-label so the accessible name reliably
+ * includes both the portal name and its hint — the visible label text is
+ * contained in the accessible name, satisfying WCAG 2.5.3 (Label in Name).
+ */
+import { Icon } from 'astro-icon/components';
+import { portals } from '../../data/nav';
+
+interface Props {
+  /** Set false on inner pages where there is no hero to overlap. */
+  overlap?: boolean;
+}
+
+const { overlap = true } = Astro.props;
+---
+
+<div class:list={[{ 'portal-strip': overlap }]}>
+  <div class="container">
+    <ul class="row g-3 list-unstyled mb-0">
+      {
+        portals.map((portal) => (
+          <li class="col-6 col-lg-3">
+            <a class="portal-card" href={portal.href} aria-label={`${portal.label} — ${portal.hint}`}>
+              <span class="portal-card__icon" aria-hidden="true">
+                <Icon name={portal.icon} width="20" height="20" />
+              </span>
+              <span class="portal-card__label" aria-hidden="true">
+                {portal.label}
+                <span class="portal-card__hint">{portal.hint}</span>
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

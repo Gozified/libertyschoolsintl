@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+/**
+ * The previous build had no 404 page at all — a broken or outdated link just
+ * hit the host's generic error page. This one keeps a lost visitor on-brand
+ * and pointed at the pages they most likely wanted.
+ */
+---
+
+<BaseLayout title="Page Not Found | Northgate Academy" noindex={true}>
+  <section class="section">
+    <div class="container measure mx-auto text-center">
+      <p class="fw-bold" style="font-size:4rem;color:var(--nga-accent-strong);line-height:1;">404</p>
+      <h1 class="h2 mt-3">We couldn't find that page</h1>
+      <p class="lead text-body-secondary mt-3">
+        The page you're looking for may have moved, or the link may be out of date.
+      </p>
+
+      <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+        <a class="btn btn-accent btn-lg" href="/">Back to Homepage</a>
+        <a class="btn btn-outline-primary btn-lg" href="/contact">Contact Us</a>
+      </div>
+
+      <div class="row g-3 mt-5 text-start">
+        {
+          [
+            { icon: 'lucide:graduation-cap', label: 'Primary School', href: '/primary' },
+            { icon: 'lucide:landmark', label: 'Secondary School', href: '/secondary' },
+            { icon: 'lucide:file-pen-line', label: 'Admissions', href: '/admissions' },
+            { icon: 'lucide:image', label: 'Gallery', href: '/gallery' },
+          ].map((item) => (
+            <div class="col-6 col-md-3">
+              <a href={item.href} class="card card-lift text-center text-decoration-none h-100">
+                <div class="card-body">
+                  <Icon name={item.icon} width="22" height="22" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+                  <p class="small mt-2 mb-0">{item.label}</p>
+                </div>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

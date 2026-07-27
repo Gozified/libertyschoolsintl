@@ -1,0 +1,62 @@
+---
+/**
+ * The "at a glance" section — snapshot of the school's key numbers and story.
+ * Sits right after the hero and portal strip on the homepage.
+ */
+import SectionTitle from '../ui/SectionTitle.astro';
+import PlaceholderImage from '../ui/PlaceholderImage.astro';
+
+interface Props {
+  headline: string;
+  standfirst?: string;
+}
+
+const { headline, standfirst } = Astro.props;
+---
+
+<section class="section">
+  <div class="container">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <SectionTitle
+          eyebrow="The school"
+          title={headline}
+          standfirst={standfirst}
+          align="start"
+        />
+
+        <div class="prose">
+          <p>
+            Northgate Academy is a day school for ages 5–18, combining academic rigour
+            with genuine pastoral care. We believe education is about nurturing the
+            whole person — not just test scores.
+          </p>
+          <p>
+            From the playgrounds of the Primary School to the senior common room,
+            students learn to think critically, act ethically, and contribute to their
+            communities. Small class sizes mean every child is known and supported.
+          </p>
+        </div>
+
+        <ul class="tick-list mt-4">
+          <li>Day school only — no boarding</li>
+          <li>Small classes, personal attention</li>
+          <li>Broad curriculum, genuine choice</li>
+          <li>Staff who know your child by name</li>
+        </ul>
+
+        <div class="mt-4 pt-2">
+          <a class="btn btn-primary" href="/about">Read our full story</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <PlaceholderImage
+          name="campus-exterior"
+          alt="Northgate Academy campus building and grounds"
+          class="rounded-2"
+        />
+      </div>
+    </div>
+  </div>
+</section>

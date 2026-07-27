@@ -1,0 +1,45 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { site } from '../../data/site';
+import { Icon } from 'astro-icon/components';
+
+const policies = [
+  'Admissions Policy',
+  'Safeguarding & Child Protection Policy',
+  'Anti-Bullying Policy',
+  'Behaviour & Discipline Policy',
+  'Special Educational Needs (SEN) Policy',
+  'Health & Safety Policy',
+  'Data Protection & Privacy Policy',
+  'Complaints Procedure',
+];
+---
+
+<PageLayout
+  title="Policies | About Us"
+  crumbs={[{ label: 'About', href: '/about' }, { label: 'Policies' }]}
+  standfirst="Our governing policies, available to download once published."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <ul class="list-unstyled d-flex flex-column gap-3">
+        {
+          policies.map((title) => (
+            <li class="d-flex align-items-center justify-content-between gap-3 p-3 rounded-2" style="background:var(--nga-tint);">
+              <span class="d-flex align-items-center gap-3">
+                <Icon name="lucide:file-text" width="20" height="20" aria-hidden="true" />
+                {title}
+              </span>
+              <span class="badge text-bg-secondary">Coming soon</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-body-secondary small mt-4">
+        Placeholder list. Full policy documents will be published here as PDFs once finalised. In
+        the meantime, request any policy directly from{' '}
+        <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+      </p>
+    </div>
+  </section>
+</PageLayout>

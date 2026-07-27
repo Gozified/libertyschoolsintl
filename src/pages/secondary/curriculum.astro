@@ -1,0 +1,87 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Curriculum | Secondary School"
+  section="secondary"
+  description="How the Secondary curriculum progresses from Junior School through to Sixth Form."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="secondary-seminar" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Secondary Curriculum</h1>
+      <p class="page-header__standfirst">From broad exploration to focused specialisation.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Years 7–9" title="Junior School: breadth first" />
+          <div class="prose">
+            <p>
+              In Years 7 to 9 (JSS 1–3), students study a broad curriculum across all major
+              subject areas — sciences, humanities, languages, arts and technology. The goal is
+              exposure: giving every student the chance to discover where their strengths and
+              interests lie before choices narrow.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="secondary-lab" alt="Secondary students in a science lab" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-5 align-items-center flex-lg-row-reverse">
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Years 10–11" title="IGCSE: rigour and choice" />
+          <div class="prose">
+            <p>
+              From Year 10 (JSS 3 / SSS 1), students select a combination of core and optional
+              subjects leading to IGCSE examinations — an internationally recognised qualification
+              that keeps doors open for university applications worldwide.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="secondary-classroom" alt="Secondary students studying" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Years 12–13" title="Sixth Form: specialisation" />
+          <div class="prose">
+            <p>
+              Sixth Form students narrow their focus to three or four subjects at an advanced
+              level, alongside dedicated university counselling. See
+              <a href="/secondary/university-careers">University &amp; Careers</a> for how we
+              support that transition.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="secondary-ict" alt="Sixth Form students working independently" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container text-center py-4">
+    <a class="btn btn-primary" href="/secondary/subjects">See the Full Subject List</a>
+  </div>
+</SectionLayout>

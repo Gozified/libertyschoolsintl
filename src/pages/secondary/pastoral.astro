@@ -1,0 +1,80 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="Pastoral Care | Secondary School"
+  section="secondary"
+  description="How Northgate Academy supports the wellbeing of every Secondary student."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="assembly" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Pastoral Care</h1>
+      <p class="page-header__standfirst">Academic rigour means little without genuine wellbeing.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle
+            eyebrow="Every student known"
+            title="How pastoral care works"
+            standfirst="Every student belongs to a form group led by a form tutor who follows their progress and wellbeing throughout the year."
+          />
+          <div class="prose">
+            <p>
+              Form tutors are a student's first point of contact for anything — academic worries,
+              friendship issues, or just a check-in. Above the tutor system sits a Head of Year for
+              each cohort, and a wider pastoral team that includes counselling support.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage name="secondary-seminar" alt="Students in a form group discussion" class="rounded-2" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:users-round', title: 'Form Tutors', desc: 'A consistent adult who knows every student in their group personally.' },
+            { icon: 'lucide:heart-handshake', title: 'Counselling Support', desc: 'Confidential support available for students who need it.' },
+            { icon: 'lucide:shield-check', title: 'Anti-Bullying Policy', desc: 'Clear reporting routes and a zero-tolerance approach — see our Policies page.' },
+            { icon: 'lucide:megaphone', title: 'Student Voice', desc: 'A Student Council gives every year group a say in school life.' },
+          ].map((item) => (
+            <div class="col-md-6 col-lg-3">
+              <div class="feature text-center">
+                <div class="feature__icon mx-auto" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container text-center measure mx-auto">
+      <p class="text-body-secondary">
+        Read our full <a href="/safeguarding">Safeguarding Statement</a> for how we protect the
+        welfare of every student.
+      </p>
+    </div>
+  </section>
+</SectionLayout>

@@ -1,0 +1,42 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { site } from '../../data/site';
+import { Icon } from 'astro-icon/components';
+
+const publications = [
+  { title: 'School Prospectus', desc: 'A full overview of Northgate Academy for prospective parents.' },
+  { title: 'Termly Newsletter', desc: 'News and updates from across the school, published each term.' },
+  { title: 'Annual Report', desc: 'A summary of the academic year — results, activities and milestones.' },
+];
+---
+
+<PageLayout
+  title="Publications | About Us"
+  crumbs={[{ label: 'About', href: '/about' }, { label: 'Publications' }]}
+  standfirst="Our prospectus, newsletters and annual reports."
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          publications.map((pub) => (
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <Icon name="lucide:book-open" width="24" height="24" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+                  <h3 class="h6 mt-3">{pub.title}</h3>
+                  <p class="text-body-secondary small mb-3">{pub.desc}</p>
+                  <span class="badge text-bg-secondary">Coming soon</span>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-4">
+        Placeholder — downloadable documents will appear here once supplied. To request a copy in
+        the meantime, contact <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+      </p>
+    </div>
+  </section>
+</PageLayout>

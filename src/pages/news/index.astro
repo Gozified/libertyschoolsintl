@@ -1,0 +1,105 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = (await getCollection('news', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const categories = ['All', ...new Set(allNews.map((n) => n.data.category))];
+---
+
+<PageLayout
+  title="News"
+  crumbs={[{ label: 'News' }]}
+  standfirst="What's been happening across Northgate Academy."
+  banner="assembly"
+>
+  <section class="section">
+    <div class="container">
+      <div class="d-flex flex-wrap gap-2 mb-5" role="group" aria-label="Filter news by category">
+        {
+          categories.map((cat, i) => (
+            <button
+              type="button"
+              class="btn btn-sm"
+              class:list={[i === 0 ? 'btn-accent' : 'btn-outline-primary']}
+              data-news-filter={cat}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <p class="visually-hidden" role="status" data-news-count></p>
+
+      <div class="row g-4" data-news-grid>
+        {
+          allNews.map((item) => (
+            <div class="col-md-6 col-lg-4" data-news-card data-category={item.data.category}>
+              <a class="card card-lift h-100 text-decoration-none" href={`/news/${item.id}`}>
+                <img
+                  src={item.data.cover.src}
+                  alt={item.data.cover.alt}
+                  width="900"
+                  height="600"
+                  class="card-img-top ratio-card"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="card-body">
+                  <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="badge bg-accent text-dark">{item.data.category}</span>
+                    <span class="text-body-secondary small">
+                      {item.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </span>
+                  </div>
+                  <h2 class="h5 mb-1 text-body">{item.data.title}</h2>
+                  <p class="text-body-secondary small mb-0">{item.data.excerpt}</p>
+                </div>
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      {
+        allNews.length === 0 && (
+          <p class="text-body-secondary text-center py-5">No news posted yet — check back soon.</p>
+        )
+      }
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  // Client-side category filter. Progressive enhancement only — every article
+  // is server-rendered and reachable with JS disabled; this just narrows the
+  // view. Categories are read from the DOM, not hand-mirrored in a second list.
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-news-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-news-card]');
+  const status = document.querySelector<HTMLElement>('[data-news-count]');
+
+  function applyFilter(category: string) {
+    let visible = 0;
+    cards.forEach((card) => {
+      const match = category === 'All' || card.dataset.category === category;
+      card.hidden = !match;
+      if (match) visible += 1;
+    });
+    if (status) status.textContent = `Showing ${visible} of ${cards.length} articles`;
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      buttons.forEach((b) => {
+        b.classList.toggle('btn-accent', b === button);
+        b.classList.toggle('btn-outline-primary', b !== button);
+        b.setAttribute('aria-pressed', String(b === button));
+      });
+      applyFilter(button.dataset.newsFilter ?? 'All');
+    });
+  });
+</script>

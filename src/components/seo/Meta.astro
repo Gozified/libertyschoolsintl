@@ -1,0 +1,51 @@
+---
+/**
+ * Per-page meta. Built from frontmatter so pages cannot silently ship the same
+ * placeholder description — which is exactly what 12 of the 13 pages in the
+ * previous build did.
+ */
+import { site } from '../../data/site';
+import { placeholder } from '../../lib/placeholder';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Absolute or root-relative image path for social previews. */
+  image?: string;
+  /** Set true on pages that should not be indexed (thank-you pages, portals). */
+  noindex?: boolean;
+  /** Appends the school name to the tab title. Off for the homepage. */
+  appendSiteName?: boolean;
+}
+
+const {
+  title,
+  description = site.description,
+  image = placeholder('og-default').src,
+  noindex = false,
+  appendSiteName = true,
+} = Astro.props;
+
+const fullTitle = appendSiteName ? `${title} | ${site.name}` : title;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{noindex && <meta name="robots" content="noindex, follow" />}
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={site.name} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content="en_NG" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

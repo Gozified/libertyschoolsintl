@@ -1,0 +1,40 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { site } from '../../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Student Portal"
+  crumbs={[{ label: 'Student Portal' }]}
+  standfirst="Timetables, resources and results for current Northgate students."
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="rounded-2 p-4 p-md-5 text-center" style="background:var(--nga-tint);">
+        <Icon name="lucide:graduation-cap" width="40" height="40" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+        <h2 class="h4 mt-3">Not yet connected</h2>
+        <p class="text-body-secondary mx-auto" style="max-width:32rem;">
+          The Student Portal isn't wired up to a live login system yet. This is a placeholder page
+          — once the school confirms which system it uses (e.g. Google Classroom, a school
+          management platform, or a custom system), this page will link straight to it.
+        </p>
+      </div>
+
+      <div class="prose mt-5">
+        <h2>What the Student Portal will offer</h2>
+        <ul>
+          <li>Class timetables and subject resources</li>
+          <li>Homework and assignment tracking</li>
+          <li>Exam results and progress reports</li>
+          <li>School announcements and calendar</li>
+        </ul>
+      </div>
+
+      <div class="text-center mt-4">
+        <p class="mb-3">Need something from the portal right now?</p>
+        <a class="btn btn-primary" href="/contact">Contact the School Office</a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

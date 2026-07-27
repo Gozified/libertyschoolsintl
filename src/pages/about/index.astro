@@ -1,0 +1,110 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<PageLayout
+  title="About Us"
+  crumbs={[{ label: 'About' }]}
+>
+  <!-- Welcome -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle
+            eyebrow="Welcome"
+            title="Message from the Head"
+          />
+          <div class="prose">
+            <p>
+              Welcome to Northgate Academy. We are delighted you are considering our school
+              for your child.
+            </p>
+            <p>
+              Northgate is built on a simple belief: that education is about nurturing the
+              whole person. We combine academic rigour with genuine pastoral care, and we
+              keep classes small so every child is known by name.
+            </p>
+            <p>
+              From our youngest pupils in Primary through to our Sixth Form students, we
+              challenge our children to think critically, act ethically, and contribute to
+              their communities. We believe that is what education is for.
+            </p>
+            <p>
+              I invite you to visit and see Northgate in action. You will find a school
+              where learning is joyful, where staff genuinely care, and where every child
+              belongs.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage
+            name="welcome-head"
+            alt="Head of School portrait"
+            class="rounded-2"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="section section-tint" id="history">
+    <div class="container">
+      <SectionTitle
+        eyebrow="Our story"
+        title="Founded on strong values"
+        align="center"
+      />
+      <div class="prose mx-auto mt-4" style="max-width:var(--nga-measure);">
+        <p>
+          Northgate Academy was founded in 1998 with a clear mission: to create a school
+          where academic excellence and genuine care for the whole child go hand in hand.
+        </p>
+        <p>
+          From our early days as a small Primary school, Northgate has grown into a thriving
+          community of over 900 students across Primary and Secondary. Yet we have never lost
+          sight of our founding principle — that every child matters, and that education is
+          about so much more than test scores.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership -->
+  <section class="section" id="leadership">
+    <div class="container">
+      <SectionTitle
+        eyebrow="Meet the team"
+        title="School leadership"
+        align="center"
+      />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { name: 'Dr Sarah Johnson', title: 'Head of School', img: 'welcome-head' },
+            { name: 'James Lee', title: 'Deputy Head', img: 'staff-portrait-1' },
+            { name: 'Emma Williams', title: 'Head of Primary', img: 'staff-portrait-2' },
+            { name: 'Michael Chen', title: 'Head of Secondary', img: 'staff-portrait-3' },
+          ].map((person) => (
+            <div class="col-md-6 col-lg-3">
+              <div class="card card-lift text-center">
+                <PlaceholderImage
+                  name={person.img}
+                  alt={`${person.name}, ${person.title}`}
+                  class="card-img-top object-cover ratio-portrait"
+                />
+                <div class="card-body">
+                  <h3 class="h6 mb-1">{person.name}</h3>
+                  <p class="text-body-secondary small mb-0">{person.title}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</PageLayout>

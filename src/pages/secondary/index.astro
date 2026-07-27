@@ -1,0 +1,161 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="Secondary School | Northgate Academy"
+  section="secondary"
+  description="Northgate Academy Secondary: rigorous academics, pastoral support, ages 11–18."
+>
+  <!-- Page header -->
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="hero-secondary" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Secondary School</h1>
+      <p class="page-header__standfirst">
+        Academic challenge, genuine choice, and every student known.
+      </p>
+    </div>
+  </div>
+
+  <!-- Overview -->
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <SectionTitle
+            eyebrow="Building on strength"
+            title="Years 7 to 13"
+            standfirst="Secondary education at Northgate is about deepening knowledge, discovering passions, and preparing for university and beyond."
+          />
+          <div class="prose">
+            <p>
+              Our Secondary School serves ages 11–18 (Years 7–13, JSS 1–SSS 3). We maintain small
+              class sizes and strong pastoral care while offering academic rigour and genuine choice
+              across a broad curriculum. By senior school, students are thinking independently,
+              developing their voices, and preparing for their next chapter.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <PlaceholderImage
+            name="secondary-classroom"
+            alt="Secondary students in a seminar discussion"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key facts -->
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle
+        eyebrow="By the numbers"
+        title="Scale for choice"
+        align="center"
+      />
+
+      <div class="row g-4 mt-5 text-center">
+        {
+          [
+            { label: 'Ages', value: '11–18' },
+            { label: 'Class max', value: '18' },
+            { label: 'Teacher:pupil', value: '1:13' },
+            { label: 'School day', value: '7:50am–3:50pm' },
+          ].map((item) => (
+            <div class="col-6 col-md-3">
+              <div class="stat__value">{item.value}</div>
+              <div class="stat__label" style="color:var(--nga-accent-strong)">
+                {item.label}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Academic pathway -->
+  <section class="section">
+    <div class="container">
+      <SectionTitle
+        eyebrow="The journey"
+        title="From exploration to specialisation"
+      />
+
+      <div class="row g-4 mt-5">
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift">
+            <div class="card-body" style="background:var(--nga-accent-soft);">
+              <h3 class="h5">Junior School (Years 7–9)</h3>
+              <p class="mb-0 text-body-secondary">
+                Broad curriculum across all subject areas, with room for exploration and
+                discovery.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift">
+            <div class="card-body" style="background:var(--nga-accent-soft);">
+              <h3 class="h5">IGCSE Years (Years 10–11)</h3>
+              <p class="mb-0 text-body-secondary">
+                Choice of subjects leading to IGCSE exams — rigorous, internationally
+                recognised.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift">
+            <div class="card-body" style="background:var(--nga-accent-soft);">
+              <h3 class="h5">Sixth Form (Years 12–13)</h3>
+              <p class="mb-0 text-body-secondary">
+                A-Levels and beyond, with university counselling and career guidance built in.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Secondary -->
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle
+        eyebrow="Our promise"
+        title="Why choose Secondary at Northgate?"
+        align="center"
+      />
+
+      <ul class="tick-list mt-5 mx-auto" style="max-width:600px;">
+        <li>Academic rigour without excessive pressure</li>
+        <li>Real pastoral care — staff know every student</li>
+        <li>Choice of subjects and pathways</li>
+        <li>University counselling and careers guidance</li>
+        <li>Co-curricular richness beyond the classroom</li>
+        <li>Values we live, not just teach</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-tight section-ink">
+    <div class="container text-center">
+      <h2 class="h3 mb-3" style="color:#fff">Ready to explore?</h2>
+      <p class="lead mb-4" style="color:rgba(255,255,255,.85)">
+        Visit the Secondary School and see where your journey leads.
+      </p>
+      <a class="btn btn-accent btn-lg" href="/admissions/enquire">
+        Make an Enquiry
+      </a>
+    </div>
+  </section>
+</SectionLayout>

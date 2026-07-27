@@ -1,0 +1,661 @@
+// ============================================================================
+//  Project components — the school-site patterns worth keeping from the
+//  previous build, rebuilt on tokens instead of hardcoded values.
+// ============================================================================
+
+// ── Section heading with accent rule ────────────────────────────────────────
+.section-title {
+  margin-bottom: 2.5rem;
+
+  &__eyebrow {
+    display: block;
+    font-family: $font-family-sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--nga-accent-strong);
+    margin-bottom: 0.625rem;
+  }
+
+  &__rule {
+    display: block;
+    width: 4.5rem;
+    height: 3px;
+    margin-top: 1.125rem;
+    background: var(--nga-accent);
+    border-radius: 2px;
+  }
+
+  &--center {
+    text-align: center;
+
+    .section-title__rule {
+      margin-inline: auto;
+    }
+  }
+
+  &--on-ink {
+    .section-title__eyebrow { color: var(--nga-accent); }
+  }
+}
+
+// ── Top utility bar ─────────────────────────────────────────────────────────
+.topbar {
+  background: $navy-900;
+  color: rgba(#fff, 0.78);
+  font-size: 0.8125rem;
+
+  a {
+    color: rgba(#fff, 0.78);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Header / nav ────────────────────────────────────────────────────────────
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  background: #fff;
+  border-bottom: 1px solid var(--nga-rule);
+  transition: box-shadow var(--nga-dur) var(--nga-ease);
+
+  &.is-scrolled {
+    box-shadow: $box-shadow-sm;
+  }
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+
+  &__mark {
+    flex: 0 0 auto;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  &__name {
+    font-family: $font-family-serif;
+    font-weight: 600;
+    font-size: 1.1875rem;
+    line-height: 1.1;
+    color: $navy-900;
+  }
+
+  &__tag {
+    display: block;
+    font-family: $font-family-sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nga-accent-strong);
+  }
+}
+
+.main-nav {
+  .nav-link {
+    font-weight: 500;
+    font-size: 0.9375rem;
+    border-radius: $border-radius-sm;
+  }
+
+  // Current-page and current-section indicator
+  .nav-link[aria-current="page"],
+  .nav-item.is-current > .nav-link {
+    color: $navy-900;
+    font-weight: 600;
+
+    @include media-breakpoint-up(lg) {
+      box-shadow: inset 0 -3px 0 0 var(--nga-accent);
+    }
+  }
+
+  .dropdown-menu {
+    border-top: 3px solid var(--nga-accent);
+  }
+}
+
+// ── Microsite sub-navigation ────────────────────────────────────────────────
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  background: var(--nga-accent-soft);
+  border-bottom: 1px solid rgba($navy-900, 0.08);
+
+  &__list {
+    display: flex;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &__link {
+    display: block;
+    white-space: nowrap;
+    padding: 0.875rem 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: $navy-800;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+
+    &:hover,
+    &:focus-visible {
+      color: $navy-900;
+      border-bottom-color: rgba($navy-900, 0.2);
+    }
+
+    &[aria-current="page"] {
+      color: $navy-900;
+      font-weight: 600;
+      border-bottom-color: var(--nga-accent);
+    }
+  }
+}
+
+// ── Page header (inner pages) ───────────────────────────────────────────────
+.page-header {
+  position: relative;
+  background: $navy-800;
+  color: #fff;
+  overflow: hidden;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img { @extend .object-cover; }
+  }
+
+  // Scrim keeps text legible over any photograph
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      rgba($navy-900, 0.92) 0%,
+      rgba($navy-900, 0.75) 45%,
+      rgba($navy-900, 0.45) 100%
+    );
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+  }
+
+  &__title {
+    font-size: var(--nga-text-page);
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  &__standfirst {
+    max-width: var(--nga-measure);
+    color: rgba(#fff, 0.85);
+    font-size: 1.125rem;
+    margin-bottom: 0;
+  }
+
+  .breadcrumb {
+    margin-bottom: 1.25rem;
+  }
+
+  .breadcrumb-item,
+  .breadcrumb-item a {
+    color: rgba(#fff, 0.72);
+  }
+
+  .breadcrumb-item a:hover { color: #fff; }
+  .breadcrumb-item.active   { color: rgba(#fff, 0.92); }
+  .breadcrumb-item + .breadcrumb-item::before { color: rgba(#fff, 0.45); }
+}
+
+// ── Hero ────────────────────────────────────────────────────────────────────
+.hero {
+  position: relative;
+  background: $navy-900;
+  color: #fff;
+  overflow: hidden;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img { @extend .object-cover; }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      95deg,
+      rgba($navy-900, 0.94) 0%,
+      rgba($navy-900, 0.78) 40%,
+      rgba($navy-900, 0.35) 100%
+    );
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 2;
+    padding-block: clamp(4rem, 11vw, 8.5rem);
+  }
+
+  &__title {
+    font-size: var(--nga-text-hero);
+    color: #fff;
+    max-width: 22ch;
+    margin-bottom: 1.25rem;
+  }
+
+  &__standfirst {
+    max-width: 48ch;
+    font-size: 1.1875rem;
+    color: rgba(#fff, 0.88);
+    margin-bottom: 2rem;
+  }
+}
+
+// ── Portal strip (overlaps the hero) ────────────────────────────────────────
+.portal-strip {
+  position: relative;
+  z-index: 5;
+  margin-top: -3rem;
+
+  @include media-breakpoint-down(md) {
+    margin-top: 1.5rem;
+  }
+}
+
+.portal-card {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  height: 100%;
+  padding: 1.125rem 1.25rem;
+  background: #fff;
+  border: 1px solid var(--nga-rule);
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  text-decoration: none;
+  color: $navy-900;
+  transition:
+    transform var(--nga-dur) var(--nga-ease),
+    box-shadow var(--nga-dur) var(--nga-ease);
+
+  &__icon {
+    flex: 0 0 auto;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--nga-accent-soft);
+    color: var(--nga-accent-strong);
+  }
+
+  &__label {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  &__hint {
+    display: block;
+    font-size: 0.8125rem;
+    color: $ink-muted;
+    font-weight: 400;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: $box-shadow-lg;
+    color: $navy-900;
+  }
+}
+
+// ── Cards ───────────────────────────────────────────────────────────────────
+.card-lift {
+  transition:
+    transform var(--nga-dur) var(--nga-ease),
+    box-shadow var(--nga-dur) var(--nga-ease);
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-4px);
+    box-shadow: $box-shadow-lg;
+  }
+}
+
+// Makes the whole card clickable while keeping one real, readable link for
+// screen readers and the status bar.
+.card-link-overlay {
+  position: relative;
+
+  a.card-link-overlay__target::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+}
+
+// ── Date chip ───────────────────────────────────────────────────────────────
+.date-chip {
+  flex: 0 0 auto;
+  display: grid;
+  place-content: center;
+  width: 4rem;
+  padding: 0.625rem 0;
+  text-align: center;
+  background: var(--nga-accent-soft);
+  border-radius: $border-radius-sm;
+  line-height: 1;
+
+  &__day {
+    display: block;
+    font-family: $font-family-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: $navy-900;
+  }
+
+  &__month {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--nga-accent-strong);
+  }
+}
+
+// ── Stats ───────────────────────────────────────────────────────────────────
+.stat {
+  &__value {
+    display: block;
+    font-family: $font-family-serif;
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+    font-weight: 600;
+    line-height: 1;
+    color: #fff;
+  }
+
+  &__label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(#fff, 0.72);
+  }
+}
+
+// ── Feature / icon block ────────────────────────────────────────────────────
+.feature {
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin-bottom: 1.125rem;
+    border-radius: $border-radius-sm;
+    background: var(--nga-accent-soft);
+    color: var(--nga-accent-strong);
+  }
+}
+
+// ── Tick list ───────────────────────────────────────────────────────────────
+.tick-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 0;
+
+  li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    color: var(--nga-accent-strong);
+  }
+}
+
+// ── Gallery ─────────────────────────────────────────────────────────────────
+.gallery-item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: $border-radius;
+  overflow: hidden;
+  cursor: zoom-in;
+
+  img {
+    transition: transform var(--nga-dur-slow) var(--nga-ease);
+  }
+
+  &:hover img,
+  &:focus-visible img {
+    transform: scale(1.05);
+  }
+}
+
+// ── Lightbox ────────────────────────────────────────────────────────────────
+// Dependency-free modal for the gallery. Visibility is toggled via the native
+// [hidden] attribute rather than a class, so "hidden until JS says otherwise"
+// can never flash open before the script runs.
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba($navy-900, 0.92);
+  }
+
+  &__dialog {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: min(92vw, 1100px);
+  }
+
+  &__figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+
+    img {
+      max-width: 100%;
+      max-height: 78vh;
+      width: auto;
+      border-radius: $border-radius;
+      object-fit: contain;
+      background: $navy-800;
+    }
+  }
+
+  &__caption {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(#fff, 0.85);
+    font-size: 0.9375rem;
+    text-align: center;
+  }
+
+  &__count {
+    color: rgba(#fff, 0.55);
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  &__close,
+  &__nav {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(#fff, 0.12);
+    color: #fff;
+    cursor: pointer;
+    transition: background var(--nga-dur-fast) var(--nga-ease);
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(#fff, 0.24);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: -3.5rem;
+    right: 0;
+  }
+}
+
+// ── Buttons ─────────────────────────────────────────────────────────────────
+// Accent button derives from the section accent, so it recolours per microsite.
+.btn-accent {
+  --bs-btn-bg: var(--nga-accent);
+  --bs-btn-border-color: var(--nga-accent);
+  --bs-btn-color: var(--nga-accent-contrast);
+  --bs-btn-hover-bg: var(--nga-accent-strong);
+  --bs-btn-hover-border-color: var(--nga-accent-strong);
+  --bs-btn-hover-color: var(--nga-accent-contrast);
+  --bs-btn-active-bg: var(--nga-accent-strong);
+  --bs-btn-active-border-color: var(--nga-accent-strong);
+  --bs-btn-active-color: var(--nga-accent-contrast);
+}
+
+.btn-on-ink {
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: rgba(255, 255, 255, 0.5);
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: #fff;
+  --bs-btn-hover-border-color: #fff;
+  --bs-btn-hover-color: #{$navy-900};
+  --bs-btn-active-bg: #fff;
+  --bs-btn-active-color: #{$navy-900};
+}
+
+// ── Footer ──────────────────────────────────────────────────────────────────
+.site-footer {
+  background: $navy-900;
+  color: rgba(#fff, 0.72);
+  font-size: 0.9375rem;
+
+  h2, h3, .footer-heading {
+    color: #fff;
+    font-family: $font-family-sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.125rem;
+  }
+
+  a {
+    color: rgba(#fff, 0.72);
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li { margin-bottom: 0.625rem; }
+  }
+
+  &__social a {
+    display: grid;
+    place-items: center;
+    width: 2.375rem;
+    height: 2.375rem;
+    border: 1px solid rgba(#fff, 0.22);
+    border-radius: 50%;
+
+    &:hover,
+    &:focus-visible {
+      background: var(--nga-accent);
+      border-color: var(--nga-accent);
+      color: var(--nga-accent-contrast);
+    }
+  }
+
+  &__bottom {
+    background: rgba(#000, 0.28);
+    font-size: 0.8125rem;
+  }
+}
+
+// ── Notice (used by portal pages — honest, not a fake login) ─────────────────
+.notice {
+  border: 1px solid var(--nga-rule);
+  border-left: 4px solid var(--nga-accent);
+  border-radius: $border-radius-sm;
+  background: $navy-50;
+  padding: 1.25rem 1.5rem;
+}
+
+// ── Placeholder marker ──────────────────────────────────────────────────────
+// Wraps every piece of invented content so unreplaced placeholders are
+// impossible to miss during review. Remove the outline rule before launch.
+.is-placeholder {
+  position: relative;
+}
+
+[data-placeholder-outline="on"] .is-placeholder {
+  outline: 1px dashed rgba($gold-600, 0.55);
+  outline-offset: 3px;
+}

@@ -1,0 +1,63 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Our Team | Primary School"
+  section="primary"
+  description="Meet the teaching staff leading Primary at Northgate Academy."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="assembly" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Our Team</h1>
+      <p class="page-header__standfirst">The people who make Primary at Northgate what it is.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="Leadership" title="Primary leadership" align="center" />
+      <div class="row g-4 mt-5 justify-content-center">
+        <div class="col-md-6 col-lg-4">
+          <div class="card card-lift text-center">
+            <PlaceholderImage name="staff-portrait-2" alt="Emma Williams, Head of Primary" class="card-img-top object-cover ratio-portrait" />
+            <div class="card-body">
+              <h3 class="h6 mb-1">Emma Williams</h3>
+              <p class="text-body-secondary small mb-0">Head of Primary</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="By year group" title="Class teachers" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { name: 'Placeholder Teacher', role: 'Primary 1 & 2 Lead' },
+            { name: 'Placeholder Teacher', role: 'Primary 3 & 4 Lead' },
+            { name: 'Placeholder Teacher', role: 'Primary 5 & 6 Lead' },
+            { name: 'Placeholder Teacher', role: 'SEN & Learning Support' },
+          ].map((person) => (
+            <div class="col-6 col-lg-3 text-center">
+              <PlaceholderImage name="staff-portrait-1" alt={`${person.name}, ${person.role}`} class="rounded-2 object-cover ratio-portrait" />
+              <h3 class="h6 mt-3 mb-0">{person.name}</h3>
+              <p class="text-body-secondary small">{person.role}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-4 text-center">
+        Full staff listing and photos to be added once supplied by the school.
+      </p>
+    </div>
+  </section>
+</SectionLayout>

@@ -1,0 +1,82 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Curriculum | Primary School"
+  section="primary"
+  description="What Primary 1 to Primary 6 students study at Northgate Academy, year by year."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="primary-reading" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Primary Curriculum</h1>
+      <p class="page-header__standfirst">A broad, balanced curriculum from Primary 1 to Primary 6.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="prose">
+        <p>
+          Our curriculum is built around core subjects taught to a high standard, alongside
+          enrichment that broadens every child's interests. Subjects are introduced age-appropriately
+          and build in depth year on year, so that by Primary 6 children move into Secondary with
+          strong foundations across every area.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="Core subjects" title="What we teach" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { title: 'English & Literacy', desc: 'Reading fluency, comprehension, grammar and creative writing.' },
+            { title: 'Mathematics', desc: 'Number, measurement, geometry, and problem-solving.' },
+            { title: 'Science', desc: 'Biology, chemistry and physics concepts through hands-on enquiry.' },
+            { title: 'Humanities', desc: 'History, geography and citizenship — understanding people and place.' },
+            { title: 'ICT & Coding', desc: 'Digital literacy, online safety, and an introduction to programming.' },
+            { title: 'Creative & Performing Arts', desc: 'Visual art, music and drama across the school year.' },
+            { title: 'French', desc: 'An introduction to a second language from Primary 1.' },
+            { title: 'Physical Education', desc: 'Fundamental movement skills, games, and swimming.' },
+            { title: 'Religious & Moral Education', desc: 'Values, character, and understanding of different faiths.' },
+          ].map((subject) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3 class="h6">{subject.title}</h3>
+                  <p class="text-body-secondary small mb-0">{subject.desc}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionTitle eyebrow="How we know it's working" title="Assessment & progress" />
+      <div class="prose mt-4">
+        <p>
+          We track progress continuously through classroom observation, regular low-stakes
+          assessment, and termly written reports to parents. Formal testing is kept
+          age-appropriate and is one part of a much broader picture of how each child is doing —
+          academically, socially and emotionally.
+        </p>
+        <p>
+          Parents meet teachers each term to discuss progress, and our door is always open for
+          questions in between.
+        </p>
+      </div>
+    </div>
+  </section>
+</SectionLayout>

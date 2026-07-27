@@ -1,0 +1,64 @@
+// ============================================================================
+//  Project tokens — values Bootstrap has no variable for.
+//  Exposed as CSS custom properties so they can be swapped per-section
+//  (the microsite accent) without recompiling Sass.
+// ============================================================================
+
+:root {
+  // Fluid display type. Only the hero and page headers use these; ordinary
+  // headings go through Bootstrap's own scale + RFS.
+  --nga-text-hero: clamp(2.25rem, 5.5vw, 4.25rem);
+  --nga-text-page: clamp(1.875rem, 4vw, 3rem);
+
+  // Vertical rhythm for full-width sections
+  --nga-section-y: clamp(3.5rem, 8vw, 6.5rem);
+  --nga-section-y-tight: clamp(2.5rem, 5vw, 4rem);
+
+  // Measure — long-form text should never run the full container width
+  --nga-measure: 68ch;
+  --nga-measure-narrow: 54ch;
+
+  // Motion. Every transition references these so "turn off animation" is a
+  // one-place change (and prefers-reduced-motion zeroes them in _base).
+  --nga-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --nga-dur-fast: 150ms;
+  --nga-dur: 260ms;
+  --nga-dur-slow: 480ms;
+
+  // Section accent — defaults to the gold brand accent. Microsites override it
+  // on [data-section], which is the whole mechanism behind their distinct feel.
+  --nga-accent: #{$gold-500};
+  --nga-accent-soft: #{$gold-100};
+  --nga-accent-strong: #{$gold-600};
+  --nga-accent-contrast: #{$navy-900};
+
+  // Hairline used for dividers and card edges
+  --nga-rule: #{$rule};
+  --nga-border: #{$rule};
+
+  // Light neutral surfaces — empty states, placeholder boxes, list rows.
+  // Same value as .section-tint's background so they read as one system.
+  --nga-tint: #{$navy-50};
+  --nga-surface: #{$navy-50};
+
+  // Muted text/icon colour, matching Bootstrap's own secondary text colour.
+  --nga-muted: #{$ink-muted};
+}
+
+// ── Microsite accents ───────────────────────────────────────────────────────
+// Primary skews warm and welcoming; Secondary skews cool and academic.
+// Both keep the shared navy brand, so the site still reads as one school.
+
+[data-section="primary"] {
+  --nga-accent: #c2703a;
+  --nga-accent-soft: #fbeee5;
+  --nga-accent-strong: #9c5528;
+  --nga-accent-contrast: #ffffff;
+}
+
+[data-section="secondary"] {
+  --nga-accent: #2e7d8f;
+  --nga-accent-soft: #e6f2f4;
+  --nga-accent-strong: #1f5b69;
+  --nga-accent-contrast: #ffffff;
+}

@@ -1,0 +1,54 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+---
+
+<SectionLayout
+  title="Subjects | Secondary School"
+  section="secondary"
+  description="Subjects offered across Junior School, IGCSE and Sixth Form at Northgate Academy."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="secondary-classroom" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Subjects</h1>
+      <p class="page-header__standfirst">What's on offer, department by department.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { dept: 'Sciences', subjects: 'Biology, Chemistry, Physics, Combined Science' },
+            { dept: 'Mathematics', subjects: 'Mathematics, Further Mathematics (Sixth Form)' },
+            { dept: 'English', subjects: 'English Language, English Literature' },
+            { dept: 'Humanities', subjects: 'History, Geography, Economics, Government' },
+            { dept: 'Languages', subjects: 'French, Spanish' },
+            { dept: 'Commercial', subjects: 'Accounting, Business Studies, Commerce' },
+            { dept: 'Creative & Technical', subjects: 'Art & Design, Music, Computer Science, Design & Technology' },
+            { dept: 'Physical Education', subjects: 'PE, Sports Science (Sixth Form option)' },
+            { dept: 'Religious & Moral Education', subjects: 'CRS / IRS' },
+          ].map((row) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h3 class="h6 mb-2">{row.dept}</h3>
+                  <p class="text-body-secondary small mb-0">{row.subjects}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p class="text-body-secondary small mt-4">
+        Placeholder subject list. Actual subject combinations and streams (Science, Commercial,
+        Arts) available at Senior level will be confirmed once curriculum details are supplied.
+      </p>
+    </div>
+  </section>
+</SectionLayout>

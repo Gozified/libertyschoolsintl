@@ -1,0 +1,40 @@
+---
+/**
+ * Sticky sub-navigation for Primary and Secondary microsites.
+ * Positioned below the main header, with the section's accent colour.
+ */
+import type { SectionConfig } from '../../data/sections';
+
+interface Props {
+  section: SectionConfig;
+}
+
+const { section } = Astro.props;
+const pathname = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === pathname) return true;
+  if (href !== '/' && pathname.startsWith(href + '/')) return true;
+  return false;
+}
+---
+
+<nav class="section-nav" data-section={section.key}>
+  <div class="container">
+    <ul class="section-nav__list">
+      {
+        section.nav.map((item) => (
+          <li>
+            <a
+              class="section-nav__link"
+              href={item.href}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</nav>

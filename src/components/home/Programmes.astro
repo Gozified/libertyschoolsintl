@@ -1,0 +1,66 @@
+---
+/**
+ * Two-column feature showcasing Primary and Secondary microsites.
+ * Each gets its own accent colour (set by data-section).
+ */
+import { sectionList } from '../../data/sections';
+import PlaceholderImage from '../ui/PlaceholderImage.astro';
+import SectionTitle from '../ui/SectionTitle.astro';
+
+const images = {
+  primary: 'hero-primary',
+  secondary: 'hero-secondary',
+} as const;
+---
+
+<section class="section section-tint">
+  <div class="container">
+    <SectionTitle
+      eyebrow="Academic"
+      title="Two sections, one school"
+      standfirst="Primary and Secondary share our values but are tailored to their learners."
+      align="center"
+    />
+
+    <div class="row g-5 mt-5">
+      {
+        sectionList.map((section) => (
+          <div class="col-lg-6" data-section={section.key}>
+            <div class="card card-lift h-100">
+              <PlaceholderImage
+                name={images[section.key]}
+                alt={`${section.label} students`}
+                class="card-img-top object-cover ratio-card"
+              />
+              <div class="card-body">
+                <span class="section-title__eyebrow">{section.ages}</span>
+                <h3 class="h3">{section.label}</h3>
+                <p class="text-body-secondary">{section.tagline}</p>
+
+                <ul class="tick-list small mt-3 mb-3">
+                  {section.key === 'primary' ? (
+                    <>
+                      <li>Curiosity and confidence</li>
+                      <li>Small classes, known by name</li>
+                      <li>Structured play and learning</li>
+                    </>
+                  ) : (
+                    <>
+                      <li>Academic challenge and choice</li>
+                      <li>Pastoral support and guidance</li>
+                      <li>Preparation for university and beyond</li>
+                    </>
+                  )}
+                </ul>
+
+                <a class="btn btn-accent" href={section.base}>
+                  Visit {section.shortLabel}
+                </a>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

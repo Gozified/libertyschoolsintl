@@ -1,0 +1,85 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import { site } from '../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Parents' Association"
+  crumbs={[{ label: "Parents' Association" }]}
+  standfirst="A partnership between home and school — for every family at Northgate."
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-7">
+          <SectionTitle eyebrow="Community" title="What the PTA does" />
+          <div class="prose">
+            <p>
+              The Northgate Parents' Association brings families together to support school life
+              — organising events, raising funds for extra facilities, and giving parents a direct
+              channel to share ideas and feedback with school leadership.
+            </p>
+            <p>
+              Every parent and guardian is automatically a member. No experience or particular time
+              commitment is required — just an interest in being part of the community.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <ul class="list-unstyled d-flex flex-column gap-3">
+            <li class="d-flex gap-3">
+              <Icon name="lucide:calendar-days" width="20" height="20" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <span>Termly general meetings, open to all parents</span>
+            </li>
+            <li class="d-flex gap-3">
+              <Icon name="lucide:party-popper" width="20" height="20" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <span>Family events — fun fairs, bake sales and end-of-term celebrations</span>
+            </li>
+            <li class="d-flex gap-3">
+              <Icon name="lucide:hand-coins" width="20" height="20" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <span>Fundraising for facilities beyond the core school budget</span>
+            </li>
+            <li class="d-flex gap-3">
+              <Icon name="lucide:message-square" width="20" height="20" aria-hidden="true" style="color:var(--nga-accent-strong)" />
+              <span>A direct voice into school leadership discussions</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <SectionTitle eyebrow="Leadership" title="PTA Executive Committee" align="center" />
+      <div class="row g-4 mt-5">
+        {
+          [
+            { name: 'Placeholder Name', role: 'PTA Chairperson' },
+            { name: 'Placeholder Name', role: 'Vice Chairperson' },
+            { name: 'Placeholder Name', role: 'Secretary' },
+            { name: 'Placeholder Name', role: 'Treasurer' },
+          ].map((person) => (
+            <div class="col-md-6 col-lg-3">
+              <div class="card h-100 text-center">
+                <div class="card-body">
+                  <h3 class="h6 mb-1">{person.name}</h3>
+                  <p class="text-body-secondary small mb-0">{person.role}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container text-center">
+      <p class="mb-3">Want to get involved or have a question for the committee?</p>
+      <a class="btn btn-primary" href={`mailto:${site.contact.email}`}>Contact the PTA</a>
+    </div>
+  </section>
+</PageLayout>

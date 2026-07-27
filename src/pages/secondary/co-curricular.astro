@@ -1,0 +1,69 @@
+---
+import SectionLayout from '../../layouts/SectionLayout.astro';
+import SectionTitle from '../../components/ui/SectionTitle.astro';
+import PlaceholderImage from '../../components/ui/PlaceholderImage.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<SectionLayout
+  title="Co-curricular | Secondary School"
+  section="secondary"
+  description="Sport, societies, leadership and trips for Secondary students at Northgate Academy."
+>
+  <div class="page-header">
+    <div class="page-header__media" aria-hidden="true">
+      <PlaceholderImage name="sports-team" alt="" eager />
+    </div>
+    <div class="container page-header__inner">
+      <h1 class="page-header__title">Co-curricular Life</h1>
+      <p class="page-header__standfirst">A full education happens outside the classroom too.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:trophy', title: 'Sport', desc: 'Football, basketball, athletics and swimming, with inter-school fixtures.' },
+            { icon: 'lucide:mic', title: 'Debate & Public Speaking', desc: 'Our Debate Society competes regionally and builds real confidence.' },
+            { icon: 'lucide:music', title: 'Music & Drama', desc: 'Bands, choir, and an annual school production.' },
+            { icon: 'lucide:landmark', title: 'Model United Nations', desc: 'Diplomacy, research and negotiation for our senior students.' },
+            { icon: 'lucide:briefcase-business', title: 'Young Enterprise', desc: 'Student-run businesses, from idea to (mock) balance sheet.' },
+            { icon: 'lucide:compass', title: 'Trips & Expeditions', desc: 'From local field studies to residential trips in Sixth Form.' },
+          ].map((item) => (
+            <div class="col-md-6 col-lg-4">
+              <div class="feature">
+                <div class="feature__icon" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-6">
+          <PlaceholderImage name="event-prizegiving" alt="Secondary students at a school event" class="rounded-2" />
+        </div>
+        <div class="col-lg-6">
+          <SectionTitle eyebrow="Leadership" title="Student leadership" />
+          <div class="prose">
+            <p>
+              Senior students take on real responsibility — as prefects, Student Council
+              representatives, and team captains. We believe leadership is learned by doing, not
+              just discussed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</SectionLayout>

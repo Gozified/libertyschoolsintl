@@ -1,0 +1,27 @@
+---
+/**
+ * Homepage hero — static, no auto-rotate.
+ *
+ * Unlike the previous build (which auto-rotated via Bootstrap's data-bs-ride),
+ * this is genuinely static markup. It sidesteps WCAG 2.2.2 (pause control for
+ * auto-rotating content) and converts better — school sites see higher CTR when
+ * the hero doesn't distract by changing while people are reading it.
+ *
+ * If a carousel becomes necessary later (e.g. showcase photos), it can be added
+ * as an optional prop; the defaults stay still.
+ */
+import PlaceholderImage from '../ui/PlaceholderImage.astro';
+
+interface Props {
+  /** Hero content lives in the default slot. */
+}
+---
+
+<section class="hero">
+  <div class="hero__media" aria-hidden="true">
+    <PlaceholderImage name="hero-campus" alt="" eager />
+  </div>
+  <div class="container hero__inner">
+    <slot />
+  </div>
+</section>

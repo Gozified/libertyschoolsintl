@@ -1,0 +1,63 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../data/site';
+---
+
+<PageLayout
+  title="Privacy Notice"
+  crumbs={[{ label: 'Privacy Notice' }]}
+  standfirst="How Northgate Academy collects, uses and protects your information."
+  noindex={true}
+>
+  <section class="section">
+    <div class="container measure mx-auto">
+      <div class="alert alert-warning" role="note">
+        <strong>Placeholder legal text.</strong> This page is a starting structure only. It has
+        not been drafted or reviewed by a qualified lawyer and must not be published as-is —
+        have it reviewed against applicable data protection law (e.g. Nigeria's NDPA) before it
+        goes live.
+      </div>
+
+      <div class="prose">
+        <h2>What we collect</h2>
+        <p>
+          We collect information you provide directly — for example through our admissions
+          enquiry form and contact form — including names, contact details, and information
+          about a prospective or current student.
+        </p>
+
+        <h2>How we use it</h2>
+        <p>
+          Information submitted through our forms is used to respond to enquiries, process
+          admissions, and communicate with parents, guardians and prospective families. We do not
+          sell or rent personal information to third parties.
+        </p>
+
+        <h2>Where it's stored</h2>
+        <p>
+          Form submissions are processed via Netlify Forms. Website content and administrative
+          access are managed through our content management system, secured by individual staff
+          logins.
+        </p>
+
+        <h2>Your rights</h2>
+        <p>
+          You may request access to, correction of, or deletion of personal information we hold
+          about you or your child by contacting us at
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+          This website does not use tracking or advertising cookies at this time.
+        </p>
+
+        <h2>Questions</h2>
+        <p>
+          For any questions about this notice, contact
+          <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>

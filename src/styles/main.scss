@@ -1,0 +1,255 @@
+// ============================================================================
+//  Northgate Academy — theme
+//
+//  Bootstrap 5.3 is customised at the Sass level, not by overriding CSS
+//  variables afterwards. That matters: `.btn-primary` and friends bake their
+//  colours in at compile time, so setting `--bs-primary` alone would recolour
+//  almost nothing.
+//
+//  Order below is Bootstrap's required import order. Do not rearrange.
+//
+//  ALL COLOUR VALUES ARE PLACEHOLDERS. Replace the two ramps in section 2
+//  with the school's real brand colours — nothing else needs to change.
+// ============================================================================
+
+// ── 1. Bootstrap functions (needed by the overrides below) ──────────────────
+@import "bootstrap/scss/functions";
+
+// ── 2. Brand ramps ──────────────────────────────────────────────────────────
+// PLACEHOLDER palette: deep academic navy + warm gold. Reads as established
+// and serious without looking dated.
+$navy-50:  #f2f5fb;
+$navy-100: #dfe7f4;
+$navy-200: #bccce8;
+$navy-300: #8ba6d4;
+$navy-400: #5a7cba;
+$navy-500: #3a5f9e;
+$navy-600: #2a4880;
+$navy-700: #1e3a6b;
+$navy-800: #16294c;
+$navy-900: #0f1d3d;
+
+$gold-100: #faf1dc;
+$gold-200: #f2ddb0;
+$gold-300: #e6c67f;
+$gold-400: #d9ae52;
+$gold-500: #c9962c;
+$gold-600: #a87a1d;
+$gold-700: #825d14;
+
+// Neutrals — slightly blue-tinted so they sit with the navy rather than fight it
+$ink:        #16191f;
+$ink-muted:  #565d6b;
+$rule:       #e3e7ef;
+
+// ── 3. Bootstrap variable overrides ─────────────────────────────────────────
+
+// Theme colours
+$primary:   $navy-700;
+$secondary: $ink-muted;
+$success:   #1f7a4d;
+$info:      $navy-500;
+$warning:   $gold-500;
+$danger:    #b3261e;
+$light:     $navy-50;
+$dark:      $navy-900;
+
+// Typography — Fraunces for display (a modern serif with real character,
+// avoids the tired Playfair look), Inter for everything else.
+$font-family-sans-serif: "Inter Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-family-serif:      "Fraunces Variable", Georgia, "Times New Roman", serif;
+
+$font-size-base:   1rem;
+$line-height-base: 1.65;
+$body-color:       $ink;
+$body-bg:          #fff;
+
+$headings-font-family:   $font-family-serif;
+$headings-font-weight:   600;
+$headings-line-height:   1.2;
+$headings-color:         $navy-900;
+$headings-margin-bottom: 0.75rem;
+
+$h1-font-size: 2.75rem;
+$h2-font-size: 2.125rem;
+$h3-font-size: 1.625rem;
+$h4-font-size: 1.3125rem;
+$h5-font-size: 1.125rem;
+$h6-font-size: 1rem;
+
+$lead-font-size:   1.1875rem;
+$lead-font-weight: 400;
+
+// Links — underlines on body links only (set per-context, not globally off)
+$link-color:                    $navy-600;
+$link-hover-color:              $navy-800;
+$link-decoration:               none;
+$link-hover-decoration:         underline;
+$link-shade-percentage:         18%;
+
+// Shape — three radii, not the six ad-hoc values the previous build accumulated
+$border-radius-sm: 0.375rem;
+$border-radius:    0.625rem;
+$border-radius-lg: 1rem;
+$border-radius-xl: 1.5rem;
+$border-color:     $rule;
+
+// Elevation — two steps. Anything needing a third probably wants a border.
+$box-shadow-sm: 0 1px 2px rgba($navy-900, 0.06), 0 2px 8px rgba($navy-900, 0.06);
+$box-shadow:    0 1px 3px rgba($navy-900, 0.06), 0 8px 24px rgba($navy-900, 0.08);
+$box-shadow-lg: 0 4px 12px rgba($navy-900, 0.10), 0 20px 48px rgba($navy-900, 0.13);
+
+// Focus — a visible, high-contrast ring is non-negotiable for keyboard users
+$focus-ring-width:   3px;
+$focus-ring-opacity: 1;
+$focus-ring-color:   $gold-500;
+
+// Buttons
+$btn-font-weight:      600;
+$btn-padding-y:        0.625rem;
+$btn-padding-x:        1.375rem;
+$btn-padding-y-lg:     0.8125rem;
+$btn-padding-x-lg:     1.75rem;
+$btn-border-radius:    $border-radius-sm;
+$btn-border-radius-lg: $border-radius-sm;
+$btn-focus-box-shadow: 0 0 0 $focus-ring-width rgba($gold-500, 0.55);
+
+// Navbar
+$navbar-padding-y:                 0.75rem;
+$navbar-nav-link-padding-x:        0.875rem;
+$navbar-light-color:               $navy-800;
+$navbar-light-hover-color:         $navy-600;
+$navbar-light-active-color:        $navy-900;
+$navbar-toggler-focus-width:       $focus-ring-width;
+
+// Dropdowns
+$dropdown-border-color:      $rule;
+$dropdown-border-radius:     $border-radius-sm;
+$dropdown-box-shadow:        $box-shadow;
+$dropdown-link-active-bg:    $navy-50;
+$dropdown-link-active-color: $navy-900;
+$dropdown-padding-y:         0.5rem;
+$dropdown-item-padding-y:    0.5rem;
+
+// Cards
+$card-border-color:  $rule;
+$card-border-radius: $border-radius;
+$card-spacer-y:      1.5rem;
+$card-spacer-x:      1.5rem;
+$card-cap-bg:        $navy-50;
+
+// Accordion
+$accordion-button-active-bg:    $navy-50;
+$accordion-button-active-color: $navy-900;
+$accordion-border-color:        $rule;
+$accordion-button-focus-box-shadow: 0 0 0 $focus-ring-width rgba($gold-500, 0.45);
+
+// Forms
+$input-border-color:       #c9d1e0;
+$input-focus-border-color: $navy-400;
+$input-focus-box-shadow:   0 0 0 $focus-ring-width rgba($navy-400, 0.25);
+$input-padding-y:          0.625rem;
+$form-label-font-weight:   600;
+$form-label-margin-bottom: 0.375rem;
+
+// Breadcrumb
+$breadcrumb-divider-color: $ink-muted;
+$breadcrumb-active-color:  $ink-muted;
+$breadcrumb-font-size:     0.875rem;
+$breadcrumb-margin-bottom: 0;
+
+// Layout
+// Container padding must be at least half the largest row gutter in use, or a
+// `.row.g-5` inside a `.container` overflows the viewport by the difference.
+// 1.5rem covers gutters up to g-5 and gives mobile a less cramped edge than
+// Bootstrap's default 0.75rem. Do not use g-6+ on a row directly in a container.
+$container-padding-x: 1.5rem;
+$grid-gutter-width: 1.5rem;
+
+// Feature flags
+$enable-negative-margins: true;  // the portal strip overlaps the hero
+$enable-dark-mode:        true;
+$enable-cssgrid:          true;
+
+$spacer: 1rem;
+
+// ── 4. Bootstrap variables + maps ───────────────────────────────────────────
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+// Extra theme colours available as .bg-accent / .text-accent / .btn-accent
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "accent": $gold-500,
+    "tint":   $navy-50,
+  )
+);
+
+// Wider spacing scale for the generous whitespace this design needs
+$spacers: map-merge(
+  $spacers,
+  (
+    6: $spacer * 4,
+    7: $spacer * 5,
+    8: $spacer * 6.5,
+  )
+);
+
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+
+// ── 5. Components — imported selectively to keep the bundle honest ──────────
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/accordion";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/offcanvas";
+// Deliberately omitted: progress, spinners, toasts, tooltip, popover,
+// placeholders — nothing on this site uses them.
+
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities";
+
+// Custom utilities layered into Bootstrap's own utility API so they behave
+// like first-class utilities (responsive variants, consistent naming).
+$utilities: map-merge(
+  $utilities,
+  (
+    "font-family": (
+      property: font-family,
+      class: font,
+      values: (
+        sans: $font-family-sans-serif,
+        display: $font-family-serif,
+      ),
+    ),
+  )
+);
+
+@import "bootstrap/scss/utilities/api";
+
+// ── 6. Project layer ────────────────────────────────────────────────────────
+@import "theme/tokens";
+@import "theme/base";
+@import "theme/components";

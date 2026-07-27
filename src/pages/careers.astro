@@ -1,0 +1,62 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import SectionTitle from '../components/ui/SectionTitle.astro';
+import { site } from '../data/site';
+import { Icon } from 'astro-icon/components';
+---
+
+<PageLayout
+  title="Work With Us | Careers"
+  crumbs={[{ label: 'Careers' }]}
+  standfirst="Join a school that invests in its staff as much as its students."
+>
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        {
+          [
+            { icon: 'lucide:heart-handshake', title: 'A Supportive Culture', desc: 'Small classes and a genuinely collaborative staff room.' },
+            { icon: 'lucide:trending-up', title: 'Professional Development', desc: 'Ongoing training and clear pathways for career growth.' },
+            { icon: 'lucide:sparkles', title: 'Resources That Work', desc: 'Well-equipped classrooms, labs and facilities to teach well.' },
+          ].map((item) => (
+            <div class="col-md-4">
+              <div class="feature text-center">
+                <div class="feature__icon mx-auto" style="background:var(--nga-accent-soft);color:var(--nga-accent-strong);">
+                  <Icon name={item.icon} width="24" height="24" />
+                </div>
+                <h3 class="h6">{item.title}</h3>
+                <p class="text-body-secondary small mb-0">{item.desc}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint">
+    <div class="container measure mx-auto">
+      <SectionTitle eyebrow="Openings" title="Current vacancies" align="center" />
+      <div
+        class="text-center rounded-2 p-5 mt-5"
+        style="background:var(--nga-surface);border:1px dashed var(--nga-border);"
+      >
+        <Icon name="lucide:briefcase" width="32" height="32" aria-hidden="true" style="color:var(--nga-muted)" />
+        <p class="mt-3 mb-1 fw-medium">No vacancies posted at this time</p>
+        <p class="text-body-secondary small mb-0">
+          Check back soon, or send a speculative application below — we do keep strong CVs on
+          file.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight">
+    <div class="container text-center">
+      <p class="mb-3">
+        Send your CV and a short cover note to
+        <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+      </p>
+    </div>
+  </section>
+</PageLayout>
